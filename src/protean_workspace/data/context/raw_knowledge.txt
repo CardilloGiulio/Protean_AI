@@ -1,0 +1,2811 @@
+CISCO ITN / NETWORKING BASICS MASTER TXT
+BEST-EFFORT EXHAUSTIVE STUDY PACK
+Version date: 2026-04-16
+Language: English
+Format goal: clear branching for later CSV/AI-context conversion
+
+IMPORTANT NOTE
+- This file is a synthesis of public Cisco course outlines, Cisco documentation, and core Internet standards.
+- It is NOT a verbatim copy of Cisco NetAcad/Skills for All protected course text.
+- Exams/checkpoints are intentionally skipped, as requested.
+- The goal is coverage of concepts, vocabulary, relationships, command basics, and security ideas that you are expected to understand.
+
+HOW TO READ THIS FILE
+- MODULE = main branch
+- TOPIC = sub-branch matching the course sequence you gave
+- MUST KNOW = facts/concepts you should retain
+- COMMON MISTAKES = typical confusion points
+- COMMANDS = practical Cisco IOS items when relevant
+- SECURITY NOTE = where a topic has cybersecurity relevance
+
+======================================================================
+GLOBAL FOUNDATION - CONCEPTS THAT APPLY TO ALMOST EVERYTHING
+======================================================================
+
+1) A network is a system of interconnected devices that exchange data using agreed rules called protocols.
+2) Data communication always needs:
+   - a sender
+   - a receiver
+   - a message
+   - a medium
+   - a protocol
+3) Modern networking is layered:
+   - application data is created
+   - segmented at transport
+   - placed into packets at network
+   - placed into frames at data link
+   - turned into bits/signals at physical
+4) Encapsulation = adding headers (and sometimes trailers) as data moves down the stack.
+5) Decapsulation = removing them as data moves up the stack.
+6) Main identifiers:
+   - MAC address = local Layer 2 identity on a link
+   - IP address = Layer 3 logical identity for internetworking
+   - Port number = Layer 4 identifier for application processes
+7) Main devices:
+   - end device / host
+   - switch
+   - router
+   - access point
+   - firewall
+   - modem / CSU-DSU / ONT (depending on access technology)
+8) Key goals of networks:
+   - connectivity
+   - scalability
+   - reliability
+   - security
+   - performance
+   - manageability
+9) Core security mindset:
+   - assume threats exist
+   - reduce attack surface
+   - verify identity
+   - control access
+   - monitor events
+   - update / patch
+   - back up
+   - segment
+
+======================================================================
+MODULE 1 - NETWORKING TODAY
+======================================================================
+
+TOPIC 1.0 - INTRODUCTION
+Purpose:
+- Introduce why networks matter, what devices exist, and why networking knowledge matters in modern IT.
+
+Big picture:
+- Networks connect people, services, devices, data centers, cloud systems, mobile devices, IoT devices, and industrial systems.
+- The Internet is a network of networks.
+- Enterprise networks connect users, servers, services, printers, phones, cameras, and external services.
+- Home/SOHO networks are smaller but use the same fundamental ideas.
+
+TOPIC 1.1 - NETWORKS AFFECT OUR LIVES
+Core ideas:
+- Networks support communication, collaboration, business, banking, shopping, entertainment, learning, healthcare, government, and remote work.
+- Examples:
+  - web browsing
+  - cloud apps
+  - video calls
+  - email
+  - streaming
+  - online gaming
+  - smart homes
+  - online learning platforms
+- Without networks, distributed systems and cloud services would not function.
+
+Must know:
+- Real-time applications (voice/video calls, gaming) are sensitive to delay and jitter.
+- Business applications often need confidentiality, integrity, and availability.
+- Social and economic life heavily depends on reliable network connectivity.
+
+TOPIC 1.2 - NETWORK COMPONENTS
+A) End devices
+- PCs, laptops, servers, smartphones, tablets, printers, IP phones, cameras, sensors.
+- End devices are the source or destination of data.
+
+B) Intermediary devices
+- Switch: forwards frames inside a LAN using MAC addresses.
+- Router: forwards packets between networks using IP.
+- Wireless access point: bridges wireless clients into the LAN.
+- Firewall: enforces security policy by filtering/inspecting traffic.
+- Modem / ONT / gateway: connects local network to ISP technologies.
+
+C) Network media
+- Copper cabling
+- Fiber-optic cabling
+- Wireless radio signals
+
+D) Network interface
+- NIC = Network Interface Card/Controller
+- Gives a host physical/logical access to the network
+
+Must know:
+- Switches primarily operate at Layer 2.
+- Routers primarily operate at Layer 3.
+- Some multilayer switches can do both Layer 2 switching and Layer 3 routing.
+- Default gateway = router IP used by a host to reach remote networks.
+
+TOPIC 1.3 - NETWORK REPRESENTATIONS AND TOPOLOGIES
+Logical topology:
+- How data flows in the network.
+
+Physical topology:
+- How devices and cables are physically arranged.
+
+Common topology terms:
+- star
+- bus
+- ring
+- mesh
+- hybrid
+- point-to-point
+- point-to-multipoint
+
+Star topology:
+- Most common in Ethernet LANs.
+- Each device connects to a central switch.
+- Easy to troubleshoot and expand.
+- Single switch failure can affect many devices.
+
+Mesh topology:
+- High redundancy.
+- More expensive and complex.
+- Common in WAN/backbone/resiliency scenarios and some wireless mesh designs.
+
+Point-to-point:
+- One device directly connected to another.
+- Simple, common in WAN links or dedicated interconnects.
+
+Network diagrams:
+- Physical diagrams show cables/ports/devices.
+- Logical diagrams show IP addressing, VLANs, routing, services, traffic flows.
+
+TOPIC 1.4 - COMMON TYPES OF NETWORKS
+PAN:
+- Personal Area Network
+- Very short range (e.g. Bluetooth devices)
+
+LAN:
+- Local Area Network
+- Small geographic area, high speed
+- Usually one building, floor, office, or room
+
+WLAN:
+- Wireless LAN
+- LAN using radio rather than cable for end-device connectivity
+
+CAN:
+- Campus Area Network
+- Multiple LANs across buildings in one campus
+
+MAN:
+- Metropolitan Area Network
+- City-scale network
+
+WAN:
+- Wide Area Network
+- Connects networks across large distances
+- Example: branches connected over ISP/MPLS/Internet/VPN
+
+SAN:
+- Storage Area Network
+- Specialized high-speed network for storage access
+
+VPN:
+- Virtual Private Network
+- Not a geographic category; a secure tunnel over another network
+
+Intranet:
+- Internal organizational network/services
+
+Extranet:
+- Limited access for trusted external parties
+
+Internet:
+- Global interconnection of networks
+
+TOPIC 1.5 - INTERNET CONNECTIONS
+Common access technologies:
+- DSL
+- Cable
+- Fiber
+- Cellular / mobile broadband
+- Satellite
+- Fixed wireless
+- Ethernet handoff
+- Leased line
+
+Terms:
+- ISP = Internet Service Provider
+- Bandwidth = capacity of a link
+- Throughput = actual achieved rate
+- Latency = time delay
+- Jitter = variation in delay
+- Packet loss = data not successfully delivered
+
+Home example:
+- Device -> Wi-Fi/router -> modem/ONT/gateway -> ISP -> Internet
+
+Enterprise example:
+- Host -> access switch -> distribution/core -> edge router/firewall -> ISP/cloud
+
+TOPIC 1.6 - RELIABLE NETWORKS
+A reliable network must consider:
+1. Fault tolerance
+   - Redundancy
+   - Alternate paths
+   - Backup power / dual devices / dual links
+
+2. Scalability
+   - Ability to grow without major redesign
+   - Hierarchical design helps
+
+3. Quality of Service (QoS)
+   - Prioritize time-sensitive traffic (voice/video)
+   - Reduce negative effects of congestion
+
+4. Security
+   - Protect devices, data, identities, and services
+
+5. Manageability
+   - Monitoring, logging, standardization, documentation
+
+Measures affecting reliability:
+- redundant links
+- dynamic routing
+- STP in switched networks
+- high availability devices
+- link aggregation
+- backups and recovery procedures
+
+TOPIC 1.7 - NETWORK TRENDS
+Key trends:
+- BYOD (Bring Your Own Device)
+- collaboration tools
+- cloud computing
+- virtualization
+- automation
+- SDN (Software-Defined Networking)
+- IoT / IIoT
+- AI-assisted operations
+- edge computing
+- remote/hybrid work
+
+Cloud service models:
+- SaaS
+- PaaS
+- IaaS
+
+Virtualization:
+- Multiple virtual systems on shared hardware
+- More efficient resource usage
+- Easier scaling and testing
+
+Automation:
+- Reduces manual repetitive configuration
+- Improves consistency
+- Important for modern network operations
+
+TOPIC 1.8 - NETWORK SECURITY
+Security objectives (CIA triad):
+- Confidentiality = only authorized entities can see data
+- Integrity = data is not altered improperly
+- Availability = systems/services remain accessible when needed
+
+AAA:
+- Authentication = who are you?
+- Authorization = what can you do?
+- Accounting = what did you do?
+
+Common threats:
+- malware
+- phishing
+- password attacks
+- denial-of-service
+- data theft
+- eavesdropping
+- spoofing
+- unauthorized access
+- insider threats
+- misconfiguration
+
+Basic protections:
+- strong passwords / MFA
+- patching
+- endpoint protection
+- firewalls
+- segmentation
+- access control
+- secure management protocols
+- backups
+- user awareness training
+
+TOPIC 1.9 - THE IT PROFESSIONAL
+Networking roles may involve:
+- support/helpdesk
+- network technician
+- systems/network admin
+- security analyst
+- NOC engineer
+- cloud/network engineer
+- automation engineer
+- architect
+
+Soft skills matter:
+- documentation
+- communication
+- troubleshooting method
+- teamwork
+- change control
+- learning attitude
+
+TOPIC 1.10 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 1
+- Difference between end devices and intermediary devices
+- Difference between LAN, WAN, Internet, intranet, extranet
+- Why redundancy, scalability, QoS, and security matter
+- Basic security goals (CIA + AAA)
+- Network trends: cloud, BYOD, virtualization, IoT, automation
+
+COMMON MISTAKES
+- Thinking the Internet is the same as a LAN
+- Confusing topology diagrams with addressing diagrams
+- Thinking bandwidth equals actual speed in all cases
+- Thinking security is only antivirus
+
+======================================================================
+MODULE 2 - BASIC SWITCH AND END DEVICE CONFIGURATION
+======================================================================
+
+TOPIC 2.0 - INTRODUCTION
+Purpose:
+- Learn the first essential Cisco IOS tasks for a switch and a PC/end device.
+
+TOPIC 2.1 - BASIC CISCO IOS CONCEPTS
+Cisco IOS modes:
+- user EXEC: limited monitoring commands
+- privileged EXEC: administrative access (enable)
+- global configuration: system-wide changes
+- line configuration: console/VTY settings
+- interface configuration: specific port or SVI changes
+
+Prompts:
+- Switch>
+- Switch#
+- Switch(config)#
+- Switch(config-line)#
+- Switch(config-if)#
+
+Command help:
+- ? = context-sensitive help
+- tab = command completion
+- command history = reuse previous commands
+- no <command> = negate/remove command
+
+TOPIC 2.2 - BASIC INITIAL SWITCH CONFIGURATION
+Typical initial tasks:
+- set hostname
+- disable DNS lookup for typo pauses
+- configure enable secret
+- secure console line
+- secure VTY lines
+- configure MOTD banner
+- encrypt plain-text passwords
+- configure management IP on VLAN interface
+- configure default gateway (Layer 2 switch management)
+- save configuration
+
+CORE COMMAND SET (basic, classic learning path)
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname S1
+S1(config)# no ip domain-lookup
+S1(config)# enable secret <password>
+S1(config)# service password-encryption
+S1(config)# banner motd #Authorized access only#
+S1(config)# line console 0
+S1(config-line)# password <password>
+S1(config-line)# login
+S1(config-line)# logging synchronous
+S1(config-line)# exit
+S1(config)# line vty 0 15
+S1(config-line)# password <password>
+S1(config-line)# login
+S1(config-line)# transport input ssh
+S1(config-line)# exit
+S1(config)# interface vlan 1
+S1(config-if)# ip address 192.168.1.2 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.1.1
+S1(config)# end
+S1# copy running-config startup-config
+
+What each does:
+- hostname: human-readable device name
+- no ip domain-lookup: prevents delays when a mistyped command is treated like a hostname lookup
+- enable secret: protects privileged EXEC mode
+- service password-encryption: weak obfuscation for some passwords; better than plain text but not strong cryptography
+- banner motd: legal/security notice
+- line console 0: local console access settings
+- line vty: remote virtual terminal lines
+- interface vlan 1 (or another VLAN): switch virtual interface (SVI) for management
+- ip default-gateway: default path for management traffic on a Layer 2 switch
+- copy running-config startup-config: saves to NVRAM
+
+TOPIC 2.3 - END DEVICE CONFIGURATION
+On a host, usually configure:
+- IP address
+- subnet mask
+- default gateway
+- DNS server
+
+DHCP option:
+- host can dynamically receive addressing info from a DHCP server
+
+Static option:
+- manually set values
+
+TOPIC 2.4 - CONFIGURATION FILES AND MEMORY
+RAM:
+- running-config
+- volatile
+
+NVRAM:
+- startup-config
+- retained after reboot
+
+Flash:
+- IOS image and other files
+
+ROM:
+- bootstrap / ROMMON components
+
+TOPIC 2.5 - BASIC VERIFICATION COMMANDS
+show running-config
+show startup-config
+show ip interface brief
+show interfaces vlan 1
+show version
+show mac address-table
+show cdp neighbors
+ping
+traceroute
+
+TOPIC 2.6 - SECURITY BEST PRACTICES (FOUNDATIONAL)
+- Prefer SSH instead of Telnet
+- Use strong unique passwords/secrets
+- Restrict who can access VTY lines
+- Add login banner
+- Shut down unused ports
+- Use management VLAN and management ACLs in real networks
+- Save config after changes
+- Document IP plan and hostname
+
+TOPIC 2.7 - COMMON ERRORS
+- Forgot no shutdown
+- Wrong subnet mask
+- Wrong default gateway
+- Configured IP on a physical switchport instead of SVI on a Layer 2 switch
+- Did not save configuration
+- Telnet left enabled in insecure environments
+- Wrong cable/port
+
+MUST KNOW FOR MODULE 2
+- IOS modes
+- Difference between running-config and startup-config
+- Why a Layer 2 switch uses an SVI for management
+- Basic first configuration commands
+- Need for default gateway on switch management interface
+
+======================================================================
+MODULE 3 - PROTOCOLS AND MODELS
+======================================================================
+
+TOPIC 3.0 - INTRODUCTION
+Purpose:
+- Understand why communication needs rules and how layered models simplify networking.
+
+TOPIC 3.1 - THE RULES
+For communication to work, both sides must agree on:
+- message size
+- format
+- timing
+- encoding
+- addressing
+- error handling
+- delivery options
+- session behavior
+
+Human analogy:
+- conversation rules, turn-taking, language, expected response format.
+
+Network analogy:
+- protocols define the same kind of structure for machines.
+
+TOPIC 3.2 - PROTOCOLS
+Protocol:
+- A set of rules governing communication between entities.
+
+What a protocol defines:
+- syntax = structure/format
+- semantics = meaning of fields/actions
+- timing = when/how fast/order/retry behavior
+
+Examples:
+- Ethernet
+- IPv4
+- IPv6
+- ARP
+- ICMP
+- TCP
+- UDP
+- HTTP
+- HTTPS
+- DNS
+- DHCP
+- SMTP
+- IMAP
+- POP3
+- FTP
+- TFTP
+- SSH
+
+TOPIC 3.3 - PROTOCOL SUITES
+Protocol suite:
+- Set of protocols designed to work together.
+
+Main suite in networking:
+- TCP/IP
+
+TCP/IP model (common teaching version):
+- Application
+- Transport
+- Internet
+- Network Access
+
+OSI model (7 layers):
+- 7 Application
+- 6 Presentation
+- 5 Session
+- 4 Transport
+- 3 Network
+- 2 Data Link
+- 1 Physical
+
+Why models matter:
+- standard vocabulary
+- troubleshooting framework
+- modular design
+- vendor interoperability
+
+TOPIC 3.4 - STANDARDS ORGANIZATIONS
+IEEE:
+- Develops many LAN/WLAN standards, including Ethernet and Wi-Fi families.
+
+IETF:
+- Develops Internet standards through RFCs.
+
+IANA:
+- Coordinates protocol parameters such as port numbers and IP-related registries.
+
+ICANN:
+- Coordinates domain name system and Internet naming governance at high level.
+
+ISO:
+- Created the OSI reference model.
+
+TIA/EIA:
+- Physical cabling and telecom-related standards (historically very relevant in cabling discussions).
+
+Electronically important idea:
+- Networking works well because standards let different vendors interoperate.
+
+TOPIC 3.5 - REFERENCE MODELS
+OSI model details:
+- Application: user-facing network services
+- Presentation: translation/encryption/compression concepts
+- Session: dialog/session control concepts
+- Transport: end-to-end delivery, segmentation, reliability, ports
+- Network: logical addressing and routing
+- Data Link: framing, local delivery, MAC addressing
+- Physical: signals/media/bit transmission
+
+TCP/IP model details:
+Application:
+- Combines OSI application/presentation/session roles
+
+Transport:
+- TCP, UDP
+
+Internet:
+- IP, ICMP
+
+Network Access:
+- Ethernet, Wi-Fi, media access, local framing
+
+TOPIC 3.6 - DATA ENCAPSULATION
+Data names by layer (common teaching):
+- application layer: data
+- transport layer: segment (TCP) / datagram (UDP)
+- network layer: packet
+- data link layer: frame
+- physical layer: bits
+
+General flow:
+Application data
+-> TCP/UDP header added
+-> IP header added
+-> Ethernet header/trailer added
+-> transmitted as bits
+
+At destination:
+bits -> frame -> packet -> segment -> data
+
+TOPIC 3.7 - DATA ACCESS
+Peer-to-peer communication:
+- Each layer logically communicates with its peer layer on the other device using headers/protocol rules.
+
+Actual transmission:
+- Data physically goes down local stack, across medium, then up remote stack.
+
+Addressing by layers:
+- Layer 2 = MAC address
+- Layer 3 = IP address
+- Layer 4 = port number
+
+TOPIC 3.8 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 3
+- What a protocol is
+- Syntax/semantics/timing
+- TCP/IP vs OSI models
+- Main job of each OSI/TCP-IP layer
+- Encapsulation and decapsulation
+- Layer-based addressing
+
+COMMON MISTAKES
+- Thinking the OSI model is how hardware literally exists; it is a reference model
+- Mixing MAC and IP roles
+- Believing each application uses all protocols directly; stacks abstract complexity
+
+======================================================================
+MODULE 4 - PHYSICAL LAYER
+======================================================================
+
+TOPIC 4.0 - INTRODUCTION
+Purpose:
+- Learn how raw bits are physically transmitted over media.
+
+TOPIC 4.1 - PURPOSE OF THE PHYSICAL LAYER
+Main responsibilities:
+- transmit bits over media
+- define signaling
+- define connectors/interfaces
+- define media characteristics
+- define pinouts, voltages, frequencies, light pulses, radio transmission properties
+
+Physical layer does NOT understand:
+- IP addresses
+- MAC forwarding logic
+- application content
+
+It only moves bits/signals.
+
+TOPIC 4.2 - PHYSICAL LAYER CHARACTERISTICS
+Important concepts:
+- bandwidth
+- throughput
+- latency
+- interference/noise
+- attenuation
+- bit error rate
+- distance limitations
+- connector type
+- duplex capability
+- media compatibility
+
+Signal types:
+- electrical (copper)
+- optical/light (fiber)
+- radio frequency (wireless)
+
+Shared vs dedicated media:
+- Old Ethernet could be shared medium; modern switched Ethernet is usually dedicated full-duplex per link.
+
+TOPIC 4.3 - COPPER CABLING
+Characteristics:
+- carries electrical signals
+- relatively inexpensive
+- easy to terminate
+- susceptible to EMI/RFI compared with fiber
+- limited distance depending on standard and cable type
+
+Common copper forms:
+- UTP
+- STP
+- coaxial (less common in modern Ethernet access networks)
+
+TOPIC 4.4 - UTP CABLING
+UTP = Unshielded Twisted Pair
+- 4 twisted pairs = 8 wires
+- twisting reduces electromagnetic interference and crosstalk
+- common connector: RJ-45 (8P8C in practice)
+- common in Ethernet LANs
+
+Cable categories (basic student awareness):
+- Cat5e
+- Cat6
+- Cat6a
+- higher categories exist for higher performance
+
+Straight-through cable:
+- unlike devices in classic teaching (host-to-switch, switch-to-router)
+
+Crossover cable:
+- like devices in classic teaching (switch-to-switch, host-to-host)
+- modern devices often support auto-MDI/MDIX
+
+Distance:
+- Classic Ethernet twisted-pair maximum horizontal run commonly learned as 100 meters (90m permanent link + patch leads in structured cabling context)
+
+Common copper issues:
+- wrong pinout
+- too much distance
+- damaged connector
+- EMI
+- split pairs
+- poor termination
+
+TOPIC 4.5 - FIBER-OPTIC CABLING
+Characteristics:
+- carries light pulses
+- immune to electromagnetic interference
+- higher bandwidth and longer distances than copper
+- more expensive / delicate / specialized handling
+
+Types:
+- multimode fiber (MMF)
+- single-mode fiber (SMF)
+
+Multimode:
+- shorter distances
+- common inside buildings/campus segments
+
+Single-mode:
+- longer distances
+- common for longer backbone/WAN optical use
+
+Fiber advantages:
+- long distance
+- high capacity
+- EMI immunity
+- electrical isolation
+
+Fiber concerns:
+- connector cleanliness
+- proper transceivers
+- bend radius
+- higher cost
+- safety when dealing with optics
+
+TOPIC 4.6 - WIRELESS MEDIA
+Wireless uses radio waves instead of cable.
+Common traits:
+- mobility
+- easy deployment
+- interference risk
+- shared medium
+- security concerns if poorly configured
+
+Wireless factors affecting performance:
+- distance
+- obstacles
+- interference
+- channel overlap
+- frequency band
+- standards used
+- client density
+
+General Wi-Fi awareness:
+- IEEE 802.11 family
+- 2.4 GHz often longer reach / more interference
+- 5 GHz often more bandwidth / less interference than crowded 2.4 GHz
+- newer generations improve efficiency/capacity
+
+TOPIC 4.7 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 4
+- Physical layer moves bits/signals
+- Copper vs fiber vs wireless differences
+- UTP basics: twisted pairs, EMI reduction, common use
+- Fiber basics: MMF vs SMF
+- Wireless trade-offs: convenience vs interference/shared medium
+
+COMMON MISTAKES
+- Thinking fiber uses electricity
+- Thinking higher bandwidth always means lower latency in every case
+- Forgetting physical problems can cause upper-layer failures
+
+======================================================================
+MODULE 5 - NUMBER SYSTEMS
+======================================================================
+
+TOPIC 5.0 - INTRODUCTION
+Purpose:
+- Build the number skills required for networking, especially addressing and subnetting.
+
+TOPIC 5.1 - BINARY NUMBER SYSTEM
+Binary uses base 2:
+- digits only 0 and 1
+
+Place values:
+- 128 64 32 16 8 4 2 1 (for 8-bit octet)
+
+Examples:
+- 00000000 = 0
+- 00000001 = 1
+- 00000010 = 2
+- 00000101 = 5
+- 11111111 = 255
+
+Why networking uses binary:
+- digital devices work with two-state logic
+- IP addressing and masks are fundamentally binary
+
+Bits and bytes:
+- 1 bit = smallest unit (0 or 1)
+- 8 bits = 1 byte / octet
+
+Binary to decimal:
+- sum the place values where the bit is 1
+
+Decimal to binary:
+- repeatedly subtract place values from largest to smallest
+or
+- divide by 2 and track remainders
+
+TOPIC 5.2 - HEXADECIMAL NUMBER SYSTEM
+Hexadecimal uses base 16:
+- digits: 0 1 2 3 4 5 6 7 8 9 A B C D E F
+- A=10, B=11, C=12, D=13, E=14, F=15
+
+Why hex matters:
+- compact way to represent binary
+- heavily used in IPv6, MAC addresses, packet analysis
+
+Nibble:
+- 4 bits
+- one hexadecimal digit represents 4 bits
+
+Examples:
+- binary 1010 = hex A
+- binary 1111 = hex F
+- hex 1A = decimal 26
+- hex FF = decimal 255
+
+Common conversions:
+- binary <-> hex is easiest because 4 bits = 1 hex digit
+- decimal <-> binary and decimal <-> hex are crucial in subnetting and IPv6 interpretation
+
+TOPIC 5.3 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 5
+- 8-bit place values
+- Convert between binary and decimal
+- Convert between binary and hex
+- Why hex is used for IPv6 and MAC notation
+
+COMMON MISTAKES
+- Forgetting that an octet max is 255
+- Confusing bit count with decimal value
+- Misaligning 4-bit groups when converting hex
+
+======================================================================
+MODULE 6 - DATA LINK LAYER
+======================================================================
+
+TOPIC 6.0 - INTRODUCTION
+Purpose:
+- Explain local delivery over a single link and how data is framed for transmission.
+
+TOPIC 6.1 - PURPOSE OF THE DATA LINK LAYER
+Main jobs:
+- framing
+- physical addressing (MAC)
+- media access control
+- error detection (not full correction in Ethernet frame itself)
+- local delivery on the same network/link
+
+Sublayers (conceptually):
+- LLC (Logical Link Control)
+- MAC (Media Access Control)
+
+Key idea:
+- Data link is responsible for node-to-node delivery across one link, not end-to-end across multiple networks.
+
+TOPIC 6.2 - TOPOLOGIES AND ACCESS METHODS
+Data link protocols depend on media/access method.
+Examples:
+- Ethernet on LANs
+- Wi-Fi for wireless LANs
+- PPP on point-to-point links
+
+Access method concept:
+- How devices decide who may transmit on shared media.
+
+Historically:
+- CSMA/CD for shared half-duplex Ethernet
+- CSMA/CA for Wi-Fi
+Modern switched full-duplex Ethernet:
+- no collisions in normal operation
+
+TOPIC 6.3 - DATA LINK FRAME
+A frame usually includes:
+- header
+- payload (encapsulated packet)
+- trailer
+
+Common frame purposes:
+- identify sender/receiver locally
+- indicate type/length
+- carry the payload
+- enable error detection
+
+Error detection:
+- FCS/CRC
+- frame can be dropped if check fails
+
+TOPIC 6.4 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 6
+- Data link = local delivery on a link
+- Frame, not packet
+- MAC addressing belongs here
+- Error detection is commonly done with FCS/CRC
+- Ethernet and Wi-Fi are Layer 2 technologies in everyday foundational study
+
+======================================================================
+MODULE 7 - ETHERNET SWITCHING
+======================================================================
+
+TOPIC 7.0 - INTRODUCTION
+Purpose:
+- Learn Ethernet framing, MAC addressing, switching behavior, and frame forwarding.
+
+TOPIC 7.1 - ETHERNET FRAME
+Basic Ethernet frame fields (foundational view):
+- Preamble / SFD
+- Destination MAC
+- Source MAC
+- Type/Length
+- Data + padding if needed
+- FCS
+
+Key field meanings:
+- Destination MAC = intended local recipient
+- Source MAC = sender's interface MAC
+- Type = upper-layer protocol identification in Ethernet II (e.g. IPv4, ARP, IPv6)
+- FCS = error detection using CRC
+
+Ethernet characteristics:
+- dominant LAN technology
+- standard frame-based Layer 2 protocol
+- can run at many speeds
+- full-duplex is common in modern switched Ethernet
+
+TOPIC 7.2 - ETHERNET MAC ADDRESS
+MAC address:
+- 48 bits (6 bytes)
+- usually written as hexadecimal
+- example: AA-BB-CC-11-22-33 or aa:bb:cc:11:22:33
+
+Structure:
+- first half commonly associated with vendor/OUI
+- second half identifies interface/device portion
+
+Types:
+- unicast = one interface
+- broadcast = all F's (FF:FF:FF:FF:FF:FF)
+- multicast = one-to-many group
+
+Rules:
+- Switches use destination MAC to decide where to forward
+- Switches learn source MAC addresses from incoming frames
+
+TOPIC 7.3 - MAC ADDRESS TABLE
+Also called:
+- CAM table / MAC table / forwarding table
+
+How learning works:
+1. Frame arrives on a port
+2. Switch examines source MAC
+3. Switch associates source MAC with incoming port (and VLAN context)
+4. Switch looks up destination MAC
+5. If known, forwards out specific port
+6. If unknown unicast, floods within VLAN except ingress port
+7. If broadcast, floods within VLAN except ingress port
+8. If destination is on same ingress port, frame is filtered (not forwarded)
+
+Aging:
+- Dynamically learned entries time out if not refreshed
+
+Static MAC entry:
+- Manually configured
+- Does not age like dynamic entry
+
+TOPIC 7.4 - SWITCH SPEED AND FORWARDING METHODS
+Store-and-forward:
+- switch receives whole frame
+- checks FCS
+- forwards only if valid
+- most common in many switch platforms
+- safer for error handling
+
+Cut-through:
+- switch starts forwarding before entire frame is received
+- lower latency
+- may forward corrupted frames because FCS not fully checked before forwarding starts
+
+Fragment-free:
+- compromise method
+- waits long enough to avoid many runt fragment issues, but not necessarily full-frame check like store-and-forward
+
+Switching performance ideas:
+- port density
+- switching fabric/backplane
+- wire-speed forwarding
+- buffering
+- duplex
+- speed mismatch issues
+
+TOPIC 7.5 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 7
+- Ethernet frame fields
+- MAC = 48-bit hex address
+- Switch learns source MAC, forwards using destination MAC
+- Unknown unicast flooding
+- Broadcast flooding within VLAN
+- Store-and-forward vs cut-through
+
+COMMON MISTAKES
+- Thinking a switch changes source/destination MAC in normal Layer 2 forwarding
+- Confusing MAC table with ARP table
+- Thinking broadcast goes across routers by default
+
+======================================================================
+MODULE 8 - NETWORK LAYER
+======================================================================
+
+TOPIC 8.0 - INTRODUCTION
+Purpose:
+- Explain logical addressing and packet forwarding between networks.
+
+TOPIC 8.1 - CHARACTERISTICS OF THE NETWORK LAYER
+Main functions:
+- logical addressing
+- path determination / routing
+- packet forwarding between networks
+- fragmentation concepts (mainly historical/IPv4-related at this level)
+- best-effort delivery
+
+Best-effort means:
+- IP does not guarantee delivery, order, or recovery by itself.
+- Reliability is not primarily an IP function.
+
+Network layer devices:
+- routers
+- Layer 3 switches
+
+TOPIC 8.2 - IPV4 PACKET
+Important IPv4 header concepts:
+- version
+- header length
+- DSCP/ToS
+- total length
+- identification
+- flags
+- fragment offset
+- TTL
+- protocol
+- header checksum
+- source IP
+- destination IP
+
+Field purposes:
+- TTL prevents packets from looping forever
+- Protocol identifies upper-layer payload (TCP, UDP, ICMP, etc.)
+- Source/destination IP identify endpoints for routed delivery
+
+IPv4 traits:
+- 32-bit address
+- dotted decimal notation
+- supports broadcast
+- NAT commonly used because of address exhaustion
+
+TOPIC 8.3 - IPV6 PACKET
+Important IPv6 header concepts:
+- version
+- traffic class
+- flow label
+- payload length
+- next header
+- hop limit
+- source IPv6
+- destination IPv6
+
+IPv6 traits:
+- 128-bit addresses
+- colon-hex notation
+- no broadcast
+- uses multicast and anycast
+- simplified base header compared with IPv4
+- extension headers used for extra functions
+
+Hop limit:
+- IPv6 equivalent of IPv4 TTL
+
+TOPIC 8.4 - HOW A HOST ROUTES
+When a host wants to send traffic:
+1. It checks whether destination is local or remote by applying its own subnet mask/prefix.
+2. If destination is local:
+   - send directly to local target's MAC (resolved by ARP or ND)
+3. If destination is remote:
+   - send to default gateway's MAC
+   - IP destination remains the remote host; only Layer 2 next-hop frame destination is the gateway
+
+Critical idea:
+- Layer 3 destination stays the final IP destination.
+- Layer 2 destination changes hop by hop.
+
+TOPIC 8.5 - INTRODUCTION TO ROUTING
+Router functions:
+- examine destination IP
+- consult routing table
+- choose best route
+- decrement TTL/hop limit
+- rewrite Layer 2 frame for outgoing interface
+- forward or drop
+
+Routing table sources:
+- directly connected routes
+- static routes
+- dynamic routing protocol routes
+- default route
+
+Route selection basics:
+- longest prefix match first
+- then metric / administrative logic depending on route source
+
+TOPIC 8.6 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 8
+- IP handles inter-network delivery
+- IPv4 = 32 bits, IPv6 = 128 bits
+- Host decides local vs remote using subnet logic
+- Default gateway is used for remote networks
+- Router forwards based on routing table and destination IP
+
+COMMON MISTAKES
+- Thinking gateway is used for all traffic, including local subnet traffic
+- Confusing Layer 2 destination with final Layer 3 destination
+- Thinking IP itself guarantees reliable delivery
+
+======================================================================
+MODULE 9 - ADDRESS RESOLUTION
+======================================================================
+
+TOPIC 9.0 - INTRODUCTION
+Purpose:
+- Bridge the gap between Layer 3 IP addresses and Layer 2 local delivery addresses.
+
+TOPIC 9.1 - MAC AND IP
+Why both exist:
+- IP decides end-to-end path across networks
+- MAC decides local-hop delivery on a single link
+
+Same-subnet communication:
+- sender needs target MAC
+
+Remote-subnet communication:
+- sender needs default gateway MAC, not remote host MAC
+
+TOPIC 9.2 - ARP
+ARP = Address Resolution Protocol
+Used in IPv4 to map:
+- IPv4 address -> MAC address
+
+Basic ARP process:
+1. Host checks ARP cache
+2. If no entry, sends ARP Request as broadcast
+3. Device with matching IPv4 responds with ARP Reply (usually unicast)
+4. Sender stores mapping in ARP cache
+5. Frame can be sent
+
+ARP terms:
+- ARP cache
+- gratuitous ARP
+- ARP spoofing / ARP poisoning (security attack)
+
+ARP limitations:
+- local-link only
+- IPv4 only
+
+TOPIC 9.3 - IPV6 NEIGHBOR DISCOVERY
+IPv6 does not use ARP.
+Instead it uses:
+- Neighbor Discovery (ND)
+- ICMPv6 messages
+- Solicited-node multicast
+
+Functions of ND:
+- discover neighbors on same link
+- discover routers
+- resolve IPv6 to link-layer address
+- verify reachability
+- support SLAAC-related operations
+
+Important ND messages:
+- Router Solicitation (RS)
+- Router Advertisement (RA)
+- Neighbor Solicitation (NS)
+- Neighbor Advertisement (NA)
+- Redirect
+
+Comparison with ARP:
+- ARP uses broadcast in IPv4
+- ND uses ICMPv6 and multicast in IPv6
+- ND has more functions than ARP
+
+TOPIC 9.4 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 9
+- IP and MAC solve different problems
+- ARP resolves IPv4 to MAC
+- ND resolves IPv6 neighbor/link-layer information using ICMPv6
+- Remote traffic uses gateway MAC
+
+SECURITY NOTE
+- ARP poisoning can support man-in-the-middle attacks
+- IPv6 ND can also be abused without proper protections
+
+======================================================================
+MODULE 10 - BASIC ROUTER CONFIGURATION
+======================================================================
+
+TOPIC 10.0 - INTRODUCTION
+Purpose:
+- Learn the initial configuration of a Cisco router and interface setup.
+
+TOPIC 10.1 - CONFIGURE INITIAL ROUTER SETTINGS
+Typical first router tasks:
+- hostname
+- enable secret
+- no ip domain-lookup
+- console security
+- VTY security
+- MOTD banner
+- optional SSH setup
+
+Base commands:
+Router> enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# no ip domain-lookup
+R1(config)# enable secret <password>
+R1(config)# service password-encryption
+R1(config)# banner motd #Authorized access only#
+R1(config)# line console 0
+R1(config-line)# password <password>
+R1(config-line)# login
+R1(config-line)# logging synchronous
+R1(config-line)# exit
+R1(config)# line vty 0 4
+R1(config-line)# password <password>
+R1(config-line)# login
+R1(config-line)# transport input ssh
+R1(config-line)# exit
+
+TOPIC 10.2 - INTERFACE CONFIGURATION
+Typical IPv4 interface config:
+R1(config)# interface g0/0/0
+R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# description LAN-to-S1
+R1(config-if)# exit
+
+Another interface:
+R1(config)# interface g0/0/1
+R1(config-if)# ip address 10.0.0.1 255.255.255.252
+R1(config-if)# no shutdown
+
+IPv6 basic example:
+R1(config)# ipv6 unicast-routing
+R1(config)# interface g0/0/0
+R1(config-if)# ipv6 address 2001:db8:1:1::1/64
+R1(config-if)# ipv6 address fe80::1 link-local
+R1(config-if)# no shutdown
+
+Verification:
+show ip interface brief
+show ipv6 interface brief
+show interfaces
+show running-config
+ping
+traceroute
+
+TOPIC 10.3 - DEFAULT GATEWAY CONFIGURATION
+Important distinction:
+- Routers generally do NOT use ip default-gateway the same way a Layer 2 switch does when IP routing is active.
+- Routers use routing entries / default route:
+  ip route 0.0.0.0 0.0.0.0 <next-hop>
+- Hosts and Layer 2 management switches use a default gateway.
+- Routers use routing tables.
+
+TOPIC 10.4 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 10
+- Router initial setup is similar to switch setup but router interfaces carry routed traffic
+- no shutdown is required on interfaces
+- Router uses routes/default route, not just a management default gateway concept
+- Verification commands matter as much as configuration commands
+
+SECURITY NOTE
+- Prefer SSH over Telnet
+- Generate RSA keys for SSH in modern setups
+- Use login banners and least privilege
+- Limit management access source IPs in production
+
+======================================================================
+MODULE 11 - IPV4 ADDRESSING
+======================================================================
+
+TOPIC 11.0 - INTRODUCTION
+Purpose:
+- Master IPv4 structure, subnetting, and address planning.
+
+TOPIC 11.1 - IPV4 ADDRESS STRUCTURE
+IPv4 address:
+- 32 bits
+- usually shown as 4 decimal octets separated by dots
+
+Two parts:
+- network portion
+- host portion
+
+Subnet mask:
+- identifies which bits are network bits and which are host bits
+- example: 255.255.255.0 = /24
+
+Prefix notation:
+- /24 means first 24 bits are network bits
+- CIDR notation is standard modern expression
+
+TOPIC 11.2 - IPV4 UNICAST, BROADCAST, MULTICAST
+Unicast:
+- one-to-one
+
+Broadcast:
+- one-to-all on local network
+- limited broadcast: 255.255.255.255
+- directed broadcast: network-specific broadcast (often blocked for security)
+
+Multicast:
+- one-to-many interested group receivers
+- common range awareness: 224.0.0.0 to 239.255.255.255
+
+TOPIC 11.3 - TYPES OF IPV4 ADDRESSES
+Public:
+- globally routable on Internet
+
+Private (RFC 1918):
+- 10.0.0.0/8
+- 172.16.0.0/12
+- 192.168.0.0/16
+
+Loopback:
+- 127.0.0.0/8
+- 127.0.0.1 = localhost
+
+Link-local/APIPA:
+- 169.254.0.0/16
+
+Network address:
+- all host bits 0
+
+Broadcast address:
+- all host bits 1
+
+Host usable range:
+- between network and broadcast (traditional subnetting view, except special cases)
+
+TOPIC 11.4 - NETWORK SEGMENTATION
+Why segment networks:
+- reduce broadcast domains
+- improve performance
+- improve security
+- make management easier
+- support different departments/sites
+
+Segmentation tools:
+- subnets
+- VLANs
+- routing boundaries
+- ACLs/firewalls
+
+TOPIC 11.5 - SUBNETTING AN IPV4 NETWORK
+Core formulas:
+- host bits = 32 - prefix length
+- number of subnets = 2^(borrowed bits)
+- addresses per subnet = 2^(host bits)
+- usable hosts (traditional) = 2^(host bits) - 2
+
+Workflow:
+1. Determine required subnets/hosts
+2. Convert requirement to bits
+3. Borrow bits from host portion
+4. Determine new prefix
+5. Calculate block size/increment
+6. Identify subnet addresses
+7. Identify broadcast addresses
+8. Identify host ranges
+
+TOPIC 11.6 - SUBNETTING /16 AND /8
+Key point:
+- same logic as /24, but more octets vary
+- use binary and block size method carefully
+
+Block size / increment method:
+- 256 - interesting octet mask value
+
+Examples:
+- /26 mask = 255.255.255.192
+- block size = 256 - 192 = 64
+- subnet starts: .0 .64 .128 .192
+
+TOPIC 11.7 - SUBNETTING TO MEET REQUIREMENTS
+Requirement-driven subnetting:
+- identify largest host need first
+- choose smallest subnet that fits
+- avoid waste when possible
+- document every subnet
+
+Examples of host capacity:
+- /30 = 4 addresses, 2 usable hosts (classical point-to-point IPv4)
+- /29 = 8 addresses, 6 usable
+- /28 = 16 addresses, 14 usable
+- /27 = 32 addresses, 30 usable
+- /26 = 64 addresses, 62 usable
+- /25 = 128 addresses, 126 usable
+- /24 = 256 addresses, 254 usable
+
+TOPIC 11.8 - VLSM
+VLSM = Variable Length Subnet Mask
+- different subnets can use different prefix lengths
+- more efficient than one-size-fits-all subnetting
+
+Best practice process:
+1. Sort subnet requirements from largest to smallest
+2. Allocate biggest first
+3. Continue with smaller needs
+4. Avoid overlap
+5. Keep careful documentation
+
+TOPIC 11.9 - STRUCTURED DESIGN
+Good IP design should be:
+- hierarchical
+- documented
+- scalable
+- summarizable when possible
+- aligned with function/location/security policy
+
+Include documentation fields:
+- subnet name
+- VLAN/department/site
+- network address
+- prefix
+- gateway
+- usable range
+- broadcast
+- notes
+
+TOPIC 11.10 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 11
+- Network bits vs host bits
+- Subnet mask vs prefix length
+- Network, broadcast, host range
+- Public vs private vs loopback vs link-local
+- VLSM process
+- Block size method
+
+COMMON MISTAKES
+- Forgetting network and broadcast are reserved in classical IPv4 subnetting
+- Mixing decimal shortcuts without understanding binary
+- Overlapping subnets
+- Using wrong mask on host/gateway
+
+======================================================================
+MODULE 12 - IPV6 ADDRESSING
+======================================================================
+
+TOPIC 12.0 - INTRODUCTION
+Purpose:
+- Understand why IPv6 exists and how its addressing works.
+
+TOPIC 12.1 - IPV4 PROBLEMS
+Main drivers for IPv6:
+- IPv4 address exhaustion
+- growth of Internet-connected devices
+- need for simplified addressing architecture
+- better support for autoconfiguration and modern-scale design
+
+NAT helps conserve IPv4 but is not the same as solving address exhaustion architecturally.
+
+TOPIC 12.2 - IPV6 ADDRESS REPRESENTATION
+IPv6 address:
+- 128 bits
+- written in hex, separated into 8 groups of 16 bits
+- each group = 4 hex digits
+
+Example:
+2001:0db8:0000:0000:0000:ff00:0042:8329
+
+Compression rules:
+1. Leading zeros in a group can be omitted
+   0db8 -> db8
+2. One consecutive sequence of all-zero groups can be replaced by ::
+   2001:db8::ff00:42:8329
+
+Important:
+- :: can be used only once in one address
+
+TOPIC 12.3 - TYPES OF IPV6 ADDRESSES
+Global Unicast Address (GUA):
+- globally routable
+- generally in 2000::/3
+
+Link-Local Address (LLA):
+- local-link only
+- FE80::/10
+- every IPv6-enabled interface needs link-local functionality
+
+Loopback:
+- ::1
+
+Unspecified:
+- ::
+
+Unique Local Address (ULA):
+- FC00::/7 (practically often FD00::/8 use patterns)
+- private-like internal use
+
+Multicast:
+- FF00::/8
+- replaces broadcast behavior in many functions
+
+Anycast:
+- same address on multiple interfaces/devices
+- packet delivered to nearest/most appropriate instance by routing
+
+No broadcast in IPv6:
+- broadcast concept removed; multicast used instead
+
+TOPIC 12.4 - STATIC GUA AND LLA CONFIGURATION
+Example:
+ipv6 unicast-routing
+interface g0/0
+ ipv6 address 2001:db8:1:1::1/64
+ ipv6 address fe80::1 link-local
+ no shutdown
+
+Why static LLA can matter:
+- predictable routing/neighbor behavior in labs and troubleshooting
+
+TOPIC 12.5 - DYNAMIC GUA ADDRESSING
+Ways hosts get global unicast IPv6 addresses:
+- SLAAC
+- DHCPv6
+- SLAAC + DHCPv6 combinations
+
+SLAAC process (simplified):
+1. Host creates/uses link-local address
+2. Host listens for or solicits router advertisements
+3. Router advertisement provides prefix/default-gateway information
+4. Host builds global address from prefix + interface ID
+5. Duplicate Address Detection helps ensure uniqueness
+
+TOPIC 12.6 - DYNAMIC LLA ADDRESSING
+Link-local addresses can be:
+- automatically generated
+- manually configured
+
+Used for:
+- neighbor discovery
+- routing protocol adjacency
+- local-link communication
+- next-hop behavior in IPv6 routing
+
+TOPIC 12.7 - IPV6 MULTICAST ADDRESSES
+Important examples to know:
+- FF02::1 = all nodes on local link
+- FF02::2 = all routers on local link
+- solicited-node multicast = used in ND for efficient neighbor resolution
+
+Why multicast matters:
+- router discovery
+- neighbor resolution
+- service discovery scenarios
+- replacing broadcast-style functions
+
+TOPIC 12.8 - SUBNETTING AN IPV6 NETWORK
+Common practice:
+- use /64 for normal LAN subnets
+
+Typical enterprise planning:
+- large allocation from ISP/site prefix
+- carve into many /64s
+- design by site/building/VLAN/function
+
+Key point:
+- IPv6 address space is huge
+- subnetting logic is simpler operationally in many everyday deployments because /64 is standard for LANs
+
+TOPIC 12.9 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 12
+- IPv6 exists largely because IPv4 space is insufficient
+- 128-bit addresses in hex
+- Compression rules
+- GUA, LLA, ULA, multicast, anycast
+- No broadcast in IPv6
+- SLAAC basics
+- /64 is standard for normal LANs
+
+COMMON MISTAKES
+- Using :: more than once
+- Forgetting link-local significance
+- Thinking IPv6 has broadcast
+- Confusing GUA with ULA
+
+======================================================================
+MODULE 13 - ICMP
+======================================================================
+
+TOPIC 13.0 - INTRODUCTION
+Purpose:
+- Understand control/error messaging and basic connectivity tests.
+
+TOPIC 13.1 - ICMP MESSAGES
+ICMP for IPv4:
+- communicates errors and operational information
+- carried inside IP packets
+
+Examples:
+- Destination Unreachable
+- Time Exceeded
+- Echo Request
+- Echo Reply
+- Redirect
+
+ICMPv6:
+- similar family for IPv6, plus integral support for Neighbor Discovery and related control functions
+
+Important insight:
+- ICMP is not “just ping.”
+- It supports diagnostics and network control behavior.
+
+TOPIC 13.2 - PING AND TRACEROUTE
+Ping:
+- sends Echo Request
+- expects Echo Reply
+- tests reachability and basic round-trip response
+
+Ping can reveal:
+- host reachable/not reachable
+- basic latency estimate
+- packet loss symptoms
+
+Traceroute/tracert:
+- discovers path hop by hop using TTL/hop-limit expiration behavior
+- routers returning time-exceeded messages reveal the path
+
+What ping cannot prove:
+- full application health
+- absence of packet filtering
+- full path stability under load
+
+TOPIC 13.3 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 13
+- ICMP carries error/control messages
+- Ping uses Echo Request/Reply
+- Traceroute relies on TTL/hop-limit expiration
+- ICMPv6 is essential to IPv6 operation, not optional fluff
+
+SECURITY NOTE
+- ICMP can be filtered, rate-limited, or abused in reconnaissance/DoS contexts
+- Blindly blocking all ICMP/ICMPv6 is usually a bad idea, especially in IPv6
+
+======================================================================
+MODULE 14 - TRANSPORT LAYER
+======================================================================
+
+TOPIC 14.0 - INTRODUCTION
+Purpose:
+- Learn how hosts deliver data to the right applications and how reliability is managed.
+
+TOPIC 14.1 - DATA TRANSPORT
+Transport layer responsibilities:
+- segmentation / reassembly
+- end-to-end process communication
+- multiplexing using port numbers
+- reliability / flow control (mainly TCP)
+- connection management (TCP)
+
+Multiplexing:
+- many apps share one IP address by using different ports
+
+TOPIC 14.2 - TCP OVERVIEW
+TCP characteristics:
+- connection-oriented
+- reliable
+- ordered delivery
+- byte-stream oriented
+- acknowledgments
+- retransmissions
+- sequencing
+- flow control
+- congestion-aware behavior
+
+Used by applications where accuracy matters:
+- web (traditionally TCP for HTTP/HTTPS)
+- email protocols
+- file transfer
+- remote login
+- many business apps
+
+TOPIC 14.3 - UDP OVERVIEW
+UDP characteristics:
+- connectionless
+- low overhead
+- no built-in reliability/order guarantee
+- best for latency-sensitive or simple request/response patterns
+
+Used by:
+- DNS queries (classic common case)
+- streaming/real-time apps
+- VoIP
+- online gaming
+- DHCP
+- TFTP
+- some telemetry
+
+UDP is not “bad” or “worse”:
+- it is appropriate when application can tolerate loss or handles recovery itself.
+
+TOPIC 14.4 - PORT NUMBERS
+Ports identify application processes.
+
+Ranges:
+- well-known/system: 0-1023
+- registered/user: 1024-49151
+- dynamic/private/ephemeral: 49152-65535
+
+Common ports to know:
+- FTP 21 control
+- SSH 22
+- Telnet 23
+- SMTP 25
+- DNS 53
+- DHCPv4 server 67 / client 68
+- HTTP 80
+- POP3 110
+- IMAP4 143
+- HTTPS 443
+- SMB commonly 445
+- DHCPv6 server 547 / client 546
+- TFTP 69
+- NTP 123
+- SNMP 161/162
+
+TOPIC 14.5 - TCP COMMUNICATION PROCESS
+Classic phases:
+1. connection establishment
+   - three-way handshake
+   - SYN
+   - SYN-ACK
+   - ACK
+
+2. data transfer
+   - sequence numbers
+   - acknowledgments
+   - windowing
+   - retransmission if needed
+
+3. connection termination
+   - FIN/ACK process (simplified view)
+
+TOPIC 14.6 - RELIABILITY AND FLOW CONTROL
+Reliability tools:
+- sequence numbers
+- acknowledgments
+- retransmission timers
+- checksum
+- window size
+- sliding window behavior
+
+Flow control:
+- prevents sender from overwhelming receiver
+
+Congestion awareness:
+- transport/network stack reacts to congestion conditions; exact behavior depends on implementation
+
+TOPIC 14.7 - UDP COMMUNICATION
+UDP process is simpler:
+- source port
+- destination port
+- length
+- checksum
+- payload
+
+No handshake like TCP.
+Application handles any needed reliability/timing logic.
+
+TOPIC 14.8 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 14
+- TCP = reliable, connection-oriented
+- UDP = low overhead, connectionless
+- Ports identify applications
+- Handshake basics
+- Flow control and acknowledgments are TCP concepts
+
+COMMON MISTAKES
+- Thinking UDP is always faster in practical app performance
+- Thinking TCP errors are “fixed by IP”
+- Confusing socket = IP only; it is IP + port (simplified)
+
+======================================================================
+MODULE 15 - APPLICATION LAYER
+======================================================================
+
+TOPIC 15.0 - INTRODUCTION
+Purpose:
+- Learn the protocols used directly by user-facing services and applications.
+
+TOPIC 15.1 - APPLICATION, PRESENTATION, SESSION
+In TCP/IP, these OSI upper-layer functions are grouped broadly into the application layer.
+
+Application role:
+- provides network services to user apps
+
+Presentation concepts:
+- formatting / encoding / encryption / compression
+
+Session concepts:
+- dialog/session setup, maintenance, teardown ideas
+
+TOPIC 15.2 - PEER-TO-PEER
+Peer-to-peer (P2P):
+- hosts can act as both client and server
+- direct sharing between devices
+- less centralized
+- examples include some file-sharing or collaboration models
+
+Client-server:
+- dedicated server provides resources/services
+- clients request them
+
+Comparison:
+- Client-server gives stronger central management and scalability for many environments
+- P2P is simple but may be harder to secure/manage
+
+TOPIC 15.3 - WEB AND E-MAIL PROTOCOLS
+Web:
+- HTTP = Hypertext Transfer Protocol
+- HTTPS = HTTP over TLS for secure web communication
+
+Email workflow:
+- SMTP = sending/relay
+- POP3 = simple retrieval/download model
+- IMAP = server-centric mailbox synchronization model
+
+General email path:
+Mail client -> SMTP server -> remote mail server -> POP3/IMAP retrieval by recipient
+
+TOPIC 15.4 - IP ADDRESSING SERVICES
+DNS:
+- resolves names to IP addresses
+- hierarchical distributed system
+- records include A, AAAA, CNAME, MX, etc.
+
+DHCPv4:
+- automatically assigns IPv4 address, mask, gateway, DNS, lease time, etc.
+
+DHCP process (classic DORA):
+- Discover
+- Offer
+- Request
+- Acknowledge
+
+DHCPv6:
+- exists for IPv6 environments
+- may coexist with SLAAC depending on design
+
+TOPIC 15.5 - FILE SHARING SERVICES
+FTP:
+- reliable file transfer using TCP
+- separate control/data concepts
+- clear-text in classic FTP (security concern)
+
+TFTP:
+- simple file transfer over UDP
+- lightweight, minimal, often used in boot/config contexts
+- less feature-rich and less secure
+
+SMB/CIFS awareness:
+- common in Windows file/printer sharing
+
+Network file sharing considerations:
+- permissions
+- authentication
+- confidentiality
+- integrity
+- performance
+
+TOPIC 15.6 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 15
+- Difference between client-server and peer-to-peer
+- HTTP vs HTTPS
+- SMTP vs POP3 vs IMAP
+- DNS purpose
+- DHCP purpose and DORA
+- FTP vs TFTP
+
+SECURITY NOTE
+- Prefer HTTPS, SSH, SFTP, modern secure protocols over clear-text alternatives where possible
+- DNS and DHCP are critical infrastructure services; if compromised, many systems fail or are redirected
+
+======================================================================
+MODULE 16 - NETWORK SECURITY FUNDAMENTALS
+======================================================================
+
+TOPIC 16.0 - INTRODUCTION
+Purpose:
+- Learn threat categories, common attacks, mitigations, and basic device hardening.
+
+TOPIC 16.1 - SECURITY THREATS AND VULNERABILITIES
+Threat:
+- a potential cause of harm
+
+Vulnerability:
+- a weakness that can be exploited
+
+Exploit:
+- code or technique that takes advantage of a vulnerability
+
+Risk:
+- likelihood + impact of exploitation
+
+Attack surface:
+- all exposed points an attacker may target
+
+Main vulnerability sources:
+- software bugs
+- unpatched systems
+- weak passwords
+- excessive privileges
+- insecure protocols
+- bad configuration
+- poor physical security
+- human error
+- lack of monitoring
+
+Threat categories:
+- external attackers
+- insiders
+- malware
+- social engineering
+- accidental misuse
+- environmental/physical issues
+
+TOPIC 16.2 - NETWORK ATTACKS
+A) Malware family
+Malware = malicious software
+
+Key malware types:
+1. Virus
+   - attaches to legitimate files/programs
+   - usually needs user action/execution to spread
+
+2. Worm
+   - self-replicates across networks automatically
+   - may spread without user action
+   - especially dangerous for networks because it can propagate fast and consume resources
+
+3. Trojan
+   - appears legitimate but performs malicious actions
+   - often opens backdoors, steals data, or drops other malware
+
+4. Ransomware
+   - encrypts files/systems or threatens data exposure for payment
+
+5. Spyware
+   - secretly collects information
+
+6. Adware
+   - unwanted advertising software; may also track users
+
+7. Rootkit
+   - hides malicious presence and enables privileged persistence
+
+8. Bot / botnet malware
+   - infected device becomes remotely controlled node
+   - botnets can launch DDoS, spam, cryptomining, further malware delivery
+
+9. Keylogger
+   - captures keystrokes
+
+10. Backdoor
+   - covert access mechanism bypassing normal authentication
+
+B) Social engineering
+- phishing
+- spear phishing
+- vishing
+- smishing
+- pretexting
+- baiting
+- tailgating / piggybacking
+- impersonation
+
+Phishing:
+- fraudulent messages pretending to be trusted source
+- used to steal credentials or deliver malware
+
+C) Password attacks
+- brute force
+- dictionary attack
+- credential stuffing
+- password spraying
+- reuse of leaked credentials
+
+D) Reconnaissance
+- scanning
+- sniffing
+- enumeration
+- footprinting
+
+E) Spoofing / interception
+- IP spoofing
+- MAC spoofing
+- ARP poisoning
+- DNS poisoning
+- man-in-the-middle (MitM)
+- session hijacking
+
+F) Availability attacks
+- DoS
+- DDoS
+- resource exhaustion
+- broadcast amplification in some contexts
+- service crashes
+
+G) Data-focused attacks
+- exfiltration
+- unauthorized access
+- tampering
+- privilege escalation
+- lateral movement
+
+TOPIC 16.3 - MITIGATION OF NETWORK ATTACKS
+Layered defense / defense in depth:
+- multiple security controls at multiple layers
+
+Core mitigation measures:
+1. Patch management
+2. Anti-malware / endpoint protection
+3. Firewalls
+4. IDS/IPS
+5. Network segmentation / VLANs / ACLs
+6. Principle of least privilege
+7. Strong authentication / MFA
+8. Backups
+9. Security awareness training
+10. Secure remote access
+11. Logging / monitoring / SIEM
+12. Vulnerability assessment
+13. Configuration hardening
+14. Disable unused services/ports
+15. Incident response planning
+
+Specific mitigation examples:
+- Worms: patch vulnerable systems, segment networks, deploy IPS, isolate infected hosts
+- Phishing: user training, email filtering, MFA, DNS/web filtering
+- Ransomware: backups, patching, least privilege, EDR, offline recovery strategy
+- ARP spoofing: DHCP snooping / dynamic ARP inspection / segmentation (advanced beyond intro, but know the idea)
+- DoS/DDoS: rate limits, upstream protections, redundancy, filtering, capacity planning
+
+TOPIC 16.4 - DEVICE SECURITY
+Basic device hardening:
+- change default credentials
+- use strong secrets/passwords
+- prefer SSH over Telnet
+- disable unused services/interfaces
+- update software/firmware
+- restrict management access
+- use login banners
+- secure physical access
+- back up configurations
+- centralize logs where possible
+- use AAA in larger environments
+
+Management plane, control plane, data plane (basic awareness):
+- management plane = administrative access
+- control plane = routing/control traffic
+- data plane = user traffic forwarding
+Protect all three in real networks.
+
+Simple IOS hardening ideas:
+- enable secret
+- no ip domain-lookup
+- login banner
+- SSH version 2
+- local user account / AAA
+- transport input ssh
+- exec timeout
+- shutdown unused interfaces
+- description labels
+- secure SNMP/community settings if used
+- save/document configs
+
+TOPIC 16.5 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 16
+- Threat vs vulnerability vs exploit
+- Virus vs worm vs Trojan
+- Phishing and social engineering basics
+- DoS/DDoS basics
+- Main mitigations: patching, segmentation, access control, backups, user training, monitoring
+- Device hardening essentials
+
+COMMON MISTAKES
+- Calling every malware sample a virus
+- Thinking worms require user clicks
+- Thinking antivirus alone solves network security
+- Thinking strong password alone equals security
+- Neglecting backups in ransomware planning
+
+======================================================================
+MODULE 17 - BUILDING A SMALL NETWORK
+======================================================================
+
+TOPIC 17.0 - INTRODUCTION
+Purpose:
+- Combine addressing, switching, routing, and security fundamentals into a small working network.
+
+TOPIC 17.1 - DEVICES IN A SMALL NETWORK
+Typical small network components:
+- end devices (PCs/laptops/printers/phones)
+- access switch
+- router or firewall/router gateway
+- wireless access point
+- ISP device / modem / ONT
+- optional NAS/server
+
+Possible design pattern:
+- LAN users -> switch/Wi-Fi -> router/firewall -> Internet
+
+TOPIC 17.2 - APPLICATIONS AND PROTOCOLS IN SMALL NETWORKS
+Common protocols/services in small networks:
+- Ethernet / Wi-Fi
+- IPv4 and/or IPv6
+- ARP / ND
+- ICMP
+- TCP/UDP
+- DHCP
+- DNS
+- HTTP/HTTPS
+- SSH
+- file sharing
+- email access
+- NTP
+
+Operational needs:
+- addressing plan
+- gateway
+- Internet access
+- name resolution
+- secure management
+- reliable Wi-Fi coverage
+
+TOPIC 17.3 - SCALABILITY TO LARGER NETWORKS
+As network grows, add:
+- hierarchical design
+- VLAN segmentation
+- more switches
+- better routing design
+- stronger security controls
+- centralized services
+- monitoring/logging
+- documentation/change control
+- redundancy
+
+Signs of poor scaling:
+- flat network
+- unmanaged address plan
+- broadcast issues
+- security policy inconsistency
+- undocumented cable/port usage
+
+TOPIC 17.4 - VERIFYING CONNECTIVITY
+Basic validation sequence:
+1. Check physical link lights / interface state
+2. Verify IP settings
+3. Ping loopback
+4. Ping local interface/gateway
+5. Ping same-subnet peer
+6. Ping remote network
+7. Test DNS resolution
+8. Test application access
+
+Useful commands:
+- ipconfig /all (Windows)
+- ifconfig / ip addr (Linux/macOS, modern Linux uses ip)
+- ping
+- tracert / traceroute
+- arp -a
+- netstat / ss (system dependent)
+- show ip interface brief
+- show running-config
+- show mac address-table
+- show arp / show ip arp
+- show ipv6 neighbors
+- show cdp neighbors
+
+TOPIC 17.5 - HOST AND IOS COMMANDS
+Host commands:
+- ipconfig /all
+- ping
+- tracert
+- nslookup
+- arp -a
+- route print (Windows)
+- netstat
+
+Cisco IOS commands:
+- show running-config
+- show startup-config
+- show interfaces
+- show ip interface brief
+- show ip route
+- show arp
+- show mac address-table
+- show cdp neighbors detail
+- show ipv6 interface brief
+- show ipv6 route
+- show ipv6 neighbors
+- copy running-config startup-config
+- reload (careful)
+- write memory (legacy equivalent idea to save config on many platforms)
+
+TOPIC 17.6 - TROUBLESHOOTING METHODOLOGIES
+Classic structured method:
+1. Identify the problem
+2. Establish a theory of probable cause
+3. Test the theory
+4. Establish a plan of action and implement
+5. Verify full functionality and document
+6. Prevent recurrence if possible
+
+Practical networking sequence:
+- physical
+- data link
+- network
+- transport/application
+- documentation cross-check
+
+Useful habits:
+- change one thing at a time
+- verify after each change
+- compare working vs non-working side
+- read interface status carefully
+- check masks and gateways first
+- never assume DHCP/DNS are correct without verifying
+
+TOPIC 17.7 - TROUBLESHOOTING SCENARIOS
+Scenario patterns:
+1. No connectivity at all
+   Check:
+   - cable/Wi-Fi association
+   - NIC enabled
+   - interface up/down
+   - wrong VLAN
+   - wrong IP or mask
+   - no gateway
+   - duplicate IP
+
+2. Local works, Internet fails
+   Check:
+   - default gateway
+   - router route/default route
+   - NAT/firewall/ISP issues
+   - DNS if “Internet fails” only by name
+
+3. Ping by IP works, by name fails
+   Check:
+   - DNS server settings
+   - DNS reachability
+   - record resolution
+
+4. Some hosts communicate, others do not
+   Check:
+   - subnet mismatch
+   - VLAN mismatch
+   - ACL/security policy
+   - switch MAC learning
+   - duplicate address conflict
+
+5. Intermittent issues
+   Check:
+   - duplex mismatch
+   - bad cable
+   - congestion
+   - wireless interference
+   - flapping interface
+   - resource exhaustion / malware
+
+TOPIC 17.8 - QUIZ/PRACTICE
+Skipped by request.
+
+MUST KNOW FOR MODULE 17
+- Build connectivity in layers
+- Verify from physical upward
+- Use both host and IOS commands
+- DNS issues can look like general connectivity failures
+- Small networks still need security and documentation
+
+======================================================================
+CROSS-MODULE APPENDIX A - CORE PACKET/FRAME/HEADER SUMMARY
+======================================================================
+
+1) ETHERNET FRAME
+- Destination MAC
+- Source MAC
+- Type/Length
+- Payload
+- FCS
+Used for:
+- local link delivery
+
+2) IPV4 HEADER (conceptual essentials)
+- Version
+- IHL
+- DSCP/ToS
+- Total Length
+- Identification
+- Flags
+- Fragment Offset
+- TTL
+- Protocol
+- Header Checksum
+- Source IP
+- Destination IP
+
+3) IPV6 HEADER (conceptual essentials)
+- Version
+- Traffic Class
+- Flow Label
+- Payload Length
+- Next Header
+- Hop Limit
+- Source IPv6
+- Destination IPv6
+
+4) TCP HEADER (essentials)
+- Source Port
+- Destination Port
+- Sequence Number
+- Acknowledgment Number
+- Flags
+- Window
+- Checksum
+- Optional fields
+
+5) UDP HEADER
+- Source Port
+- Destination Port
+- Length
+- Checksum
+
+6) ICMP / ICMPv6
+- Type
+- Code
+- Checksum
+- type-specific fields
+Used for:
+- errors
+- diagnostics
+- control information
+
+======================================================================
+CROSS-MODULE APPENDIX B - ESSENTIAL SECURITY VOCABULARY
+======================================================================
+
+Asset:
+- anything valuable to protect
+
+Threat actor:
+- entity performing or attempting attack
+
+Attack vector:
+- path/method used to compromise target
+
+Payload:
+- malicious functional part delivered by exploit or malware
+
+Persistence:
+- attacker maintaining access over time
+
+Lateral movement:
+- attacker moving from one system to another internally
+
+Privilege escalation:
+- attacker gaining higher permissions
+
+Exfiltration:
+- data stolen out of environment
+
+Zero-day:
+- vulnerability unknown or unpatched at time of exploitation
+
+Patch:
+- update fixing bugs/vulnerabilities
+
+Hardening:
+- reducing attack surface and insecure defaults
+
+Segmentation:
+- dividing network into smaller controlled zones
+
+Least privilege:
+- give only necessary permissions
+
+Defense in depth:
+- multiple protective layers
+
+IoC:
+- indicator of compromise
+
+False positive / false negative:
+- security detection accuracy terms
+
+======================================================================
+CROSS-MODULE APPENDIX C - MUST-MEMORIZE PORTS AND SERVICES
+======================================================================
+
+20/21 - FTP (data/control in classic model awareness)
+22 - SSH
+23 - Telnet
+25 - SMTP
+53 - DNS
+67/68 - DHCPv4 server/client
+69 - TFTP
+80 - HTTP
+110 - POP3
+123 - NTP
+143 - IMAP4
+161/162 - SNMP
+443 - HTTPS
+445 - SMB
+546/547 - DHCPv6 client/server
+
+Important note:
+- Memorize protocol purpose, not only number.
+
+======================================================================
+CROSS-MODULE APPENDIX D - MUST-MEMORIZE IPV4 RANGES
+======================================================================
+
+Private:
+- 10.0.0.0/8
+- 172.16.0.0/12
+- 192.168.0.0/16
+
+Loopback:
+- 127.0.0.0/8
+
+Link-local:
+- 169.254.0.0/16
+
+Multicast:
+- 224.0.0.0/4
+
+Limited broadcast:
+- 255.255.255.255
+
+======================================================================
+CROSS-MODULE APPENDIX E - MUST-MEMORIZE IPV6 RANGES
+======================================================================
+
+Global unicast:
+- 2000::/3
+
+Link-local:
+- FE80::/10
+
+Unique local:
+- FC00::/7
+
+Multicast:
+- FF00::/8
+
+Loopback:
+- ::1
+
+Unspecified:
+- ::
+
+======================================================================
+CROSS-MODULE APPENDIX F - PRACTICAL STUDY CHECKLIST
+======================================================================
+
+If you truly understand this course, you should be able to explain:
+1. Why both MAC and IP addresses are needed
+2. How a switch learns and forwards frames
+3. How a host decides local vs remote destination
+4. What default gateway actually does
+5. Difference between TCP and UDP
+6. Difference between IPv4 and IPv6
+7. Difference between ARP and ND
+8. Why subnet masks matter
+9. How to calculate network/broadcast/host range
+10. Why /64 is common in IPv6 LANs
+11. Why DNS and DHCP are critical services
+12. Why SSH is preferred to Telnet
+13. Difference between virus, worm, Trojan, ransomware
+14. How phishing works
+15. How to troubleshoot connectivity from Layer 1 upward
+16. How to perform basic switch/router initial configuration
+
+======================================================================
+CROSS-MODULE APPENDIX G - HIGH-VALUE LAB COMMAND BLOCK
+======================================================================
+
+SWITCH
+enable
+configure terminal
+hostname S1
+no ip domain-lookup
+enable secret class
+service password-encryption
+banner motd #Authorized access only#
+line console 0
+ password cisco
+ login
+ logging synchronous
+exit
+line vty 0 15
+ password cisco
+ login
+ transport input ssh
+exit
+interface vlan 1
+ ip address 192.168.1.2 255.255.255.0
+ no shutdown
+exit
+ip default-gateway 192.168.1.1
+end
+copy running-config startup-config
+show ip interface brief
+show running-config
+show mac address-table
+
+ROUTER
+enable
+configure terminal
+hostname R1
+no ip domain-lookup
+enable secret class
+service password-encryption
+banner motd #Authorized access only#
+line console 0
+ password cisco
+ login
+ logging synchronous
+exit
+line vty 0 4
+ password cisco
+ login
+ transport input ssh
+exit
+interface g0/0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+end
+copy running-config startup-config
+show ip interface brief
+show ip route
+show arp
+
+IPv6 BASICS
+ipv6 unicast-routing
+interface g0/0/0
+ ipv6 address 2001:db8:1:1::1/64
+ ipv6 address fe80::1 link-local
+ no shutdown
+exit
+show ipv6 interface brief
+show ipv6 route
+show ipv6 neighbors
+
+======================================================================
+CROSS-MODULE APPENDIX H - MINI GLOSSARY
+======================================================================
+
+ACK:
+- Acknowledgment in TCP
+
+ARP:
+- Address Resolution Protocol
+
+Broadcast domain:
+- set of devices receiving a Layer 2 broadcast in same VLAN/subnet context
+
+CAM table:
+- switch MAC forwarding table
+
+CRC:
+- cyclic redundancy check
+
+Default gateway:
+- next-hop router used to reach remote networks
+
+DHCP:
+- dynamic address assignment service
+
+DNS:
+- name resolution service
+
+Duplex:
+- communication direction capability
+- half duplex vs full duplex
+
+FCS:
+- frame check sequence
+
+Hop:
+- one router traversal
+
+Interface:
+- network connection point on device
+
+MTU:
+- maximum transmission unit
+
+NAT:
+- network address translation
+
+ND:
+- IPv6 Neighbor Discovery
+
+NIC:
+- network interface
+
+OSI:
+- seven-layer reference model
+
+Packet:
+- Layer 3 PDU
+
+Port:
+- Layer 4 application/process identifier (not to be confused with physical switch port)
+
+PDU:
+- protocol data unit
+
+QoS:
+- quality of service
+
+SLAAC:
+- Stateless Address Autoconfiguration
+
+Subnet:
+- logical subdivision of an IP network
+
+SVI:
+- switch virtual interface
+
+TTL:
+- Time To Live in IPv4
+
+VLAN:
+- virtual LAN / logical Layer 2 segmentation
+
+VTY:
+- virtual terminal lines for remote CLI access
+
+======================================================================
+FINAL NOTES
+======================================================================
+
+1. This file is intentionally organized for later conversion into:
+   - CSV rows
+   - flashcards
+   - AI system context
+   - lesson notes
+   - quiz generation
+
+2. If you want to convert this to CSV later, the cleanest columns would be:
+   - Module
+   - Topic
+   - Concept
+   - Definition
+   - MustKnow
+   - Example
+   - SecurityNote
+   - Command
+   - CommonMistake
+
+3. Best way to study:
+   - First pass: understand relationships
+   - Second pass: memorize ranges, headers, ports, commands
+   - Third pass: do subnetting and small-lab troubleshooting by hand
+   - Fourth pass: security threat/mitigation comparison
+
+4. Highest-value “master ideas”:
+   - Encapsulation
+   - MAC vs IP vs Port
+   - Local vs remote delivery
+   - Switch vs router
+   - TCP vs UDP
+   - IPv4 vs IPv6
+   - ARP vs ND
+   - Security is layered and continuous
+
+======================================================================
+REFERENCE BASIS USED FOR THIS SYNTHESIS
+======================================================================
+
+Primary public basis:
+- Cisco NetAcad / CCNA Introduction to Networks public course outline
+- Cisco public router/switch basic configuration documentation
+- Cisco public networking/security explainer pages
+- IETF / RFC Editor standards and RFC pages
+- IANA service name and port registry
+- IEEE public standards overview pages for Ethernet/Wi-Fi context
+
+Key standards/document families reflected in this synthesis:
+- IPv4: RFC 791
+- ICMPv4: RFC 792
+- ARP: RFC 826
+- UDP: RFC 768
+- TCP modern consolidated spec: RFC 9293 (obsoletes RFC 793)
+- IPv6: RFC 8200
+- ICMPv6: RFC 4443
+- IPv6 Neighbor Discovery: RFC 4861
+- IPv6 SLAAC: RFC 4862
+- Port number ranges/registrations: IANA service names and port registry
+
+END OF FILE

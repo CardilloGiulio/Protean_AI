@@ -1,0 +1,310 @@
+{
+  "schema": "protean.assistant-assets/v1",
+  "version": "0.6.1-rc2",
+  "assistant_mode_enabled": true,
+  "rules": {
+    "eligibility": "Virtual Assistant is offered only for characters with at least one ready wardrobe pack.",
+    "locked_wardrobes": "Locked wardrobes remain visible but cannot be selected until their sprite pack is ready.",
+    "model_asset_authority": "The model emits one semantic reaction only and never chooses filenames or paths.",
+    "timeline_authority": "Assistant screen observations do not bypass timeline knowledge locks.",
+    "medium_authority": "The desktop is an observation medium, not the character physical world.",
+    "presentation_only": "Wardrobe and background choices are presentation state only."
+  },
+  "characters": [
+    {
+      "character_id": "rei-ayanami",
+      "name": "Rei Ayanami",
+      "status": "ready",
+      "default_wardrobe_id": "school",
+      "phase_ids": [
+        "early-rei",
+        "middle-rei",
+        "rei-iii"
+      ],
+      "expressions": [
+        "neutral",
+        "positive",
+        "amused",
+        "serious",
+        "concerned",
+        "surprised",
+        "thinking",
+        "embarrassed",
+        "annoyed",
+        "tired"
+      ],
+      "wardrobes": [
+        {
+          "id": "school",
+          "label": "School Uniform",
+          "status": "ready",
+          "expressions": {
+            "neutral": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/neutral.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "positive": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/positive.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "amused": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/amused.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "serious": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/serious.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "concerned": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/concerned.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "surprised": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/surprised.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "thinking": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/thinking.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "embarrassed": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/embarrassed.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "annoyed": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/annoyed.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "tired": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/school/tired.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            }
+          }
+        },
+        {
+          "id": "casual",
+          "label": "Casual",
+          "status": "ready",
+          "expressions": {
+            "neutral": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/neutral.webp",
+              "size": [
+                1024,
+                1536
+              ]
+            },
+            "positive": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/positive.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "amused": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/amused.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "serious": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/serious.webp",
+              "size": [
+                1122,
+                1402
+              ]
+            },
+            "concerned": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/concerned.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "surprised": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/surprised.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "thinking": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/thinking.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "embarrassed": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/embarrassed.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "annoyed": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/annoyed.webp",
+              "size": [
+                1086,
+                1448
+              ]
+            },
+            "tired": {
+              "status": "ready",
+              "path": "/static/assets/assistant/sprites/rei/casual/tired.webp",
+              "size": [
+                1122,
+                1402
+              ]
+            }
+          }
+        },
+        {
+          "id": "plugsuit",
+          "label": "Plugsuit",
+          "status": "locked",
+          "lock_reason": "Sprite pack not supplied yet",
+          "expressions": {
+            "neutral": {
+              "status": "incoming",
+              "expected_filename": "neutral.webp"
+            },
+            "positive": {
+              "status": "incoming",
+              "expected_filename": "positive.webp"
+            },
+            "amused": {
+              "status": "incoming",
+              "expected_filename": "amused.webp"
+            },
+            "serious": {
+              "status": "incoming",
+              "expected_filename": "serious.webp"
+            },
+            "concerned": {
+              "status": "incoming",
+              "expected_filename": "concerned.webp"
+            },
+            "surprised": {
+              "status": "incoming",
+              "expected_filename": "surprised.webp"
+            },
+            "thinking": {
+              "status": "incoming",
+              "expected_filename": "thinking.webp"
+            },
+            "embarrassed": {
+              "status": "incoming",
+              "expected_filename": "embarrassed.webp"
+            },
+            "annoyed": {
+              "status": "incoming",
+              "expected_filename": "annoyed.webp"
+            },
+            "tired": {
+              "status": "incoming",
+              "expected_filename": "tired.webp"
+            }
+          }
+        },
+        {
+          "id": "bandaged",
+          "label": "Bandaged / Wounded",
+          "status": "locked",
+          "lock_reason": "Sprite pack not supplied yet",
+          "expressions": {
+            "neutral": {
+              "status": "incoming",
+              "expected_filename": "neutral.webp"
+            },
+            "positive": {
+              "status": "incoming",
+              "expected_filename": "positive.webp"
+            },
+            "amused": {
+              "status": "incoming",
+              "expected_filename": "amused.webp"
+            },
+            "serious": {
+              "status": "incoming",
+              "expected_filename": "serious.webp"
+            },
+            "concerned": {
+              "status": "incoming",
+              "expected_filename": "concerned.webp"
+            },
+            "surprised": {
+              "status": "incoming",
+              "expected_filename": "surprised.webp"
+            },
+            "thinking": {
+              "status": "incoming",
+              "expected_filename": "thinking.webp"
+            },
+            "embarrassed": {
+              "status": "incoming",
+              "expected_filename": "embarrassed.webp"
+            },
+            "annoyed": {
+              "status": "incoming",
+              "expected_filename": "annoyed.webp"
+            },
+            "tired": {
+              "status": "incoming",
+              "expected_filename": "tired.webp"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

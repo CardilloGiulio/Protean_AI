@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Protean Workspace — a local-first character roleplay workspace.">
+  <meta name="theme-color" content="#090b10">
+  <title>Protean Workspace</title>
+  <link rel="icon" href="/static/assets/protean-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body data-theme="obsidian" data-background="protean" data-frame="notebook">
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-panel-left" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></symbol>
+    <symbol id="i-panel-right" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m4 4 17 8-17 8 3-8-3-8Z"/><path d="M7 12h14"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M15 8l2 2M17 6l2 2"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7h-5V2"/><path d="M20 7a8 8 0 1 0 1 8"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="m3 3 18 18M10.7 10.7a2 2 0 0 0 2.6 2.6M9.9 5.2A10.4 10.4 0 0 1 12 5c5 0 9 5 9 7a8 8 0 0 1-2 3.2M6.2 6.2C4.1 7.7 3 10.3 3 12c0 2 4 7 9 7a9.5 9.5 0 0 0 3-.5"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.3 3.7L17 8l-3.7 1.3L12 13l-1.3-3.7L7 8l3.7-1.3L12 3Z"/><path d="m18 13 .8 2.2L21 16l-2.2.8L18 19l-.8-2.2L15 16l2.2-.8L18 13Z"/><path d="m5 12 .6 1.6 1.4.6-1.4.6L5 16l-.6-1.2-1.4-.6 1.4-.6L5 12Z"/></symbol>
+  </svg>
+
+  <div class="ambient-layer" aria-hidden="true"></div>
+
+  <div id="authGate" class="auth-gate">
+    <section class="auth-card" aria-labelledby="authTitle">
+      <img src="/static/assets/protean-workspace-logo.svg" class="auth-logo" alt="Protean">
+      <p class="eyebrow">LOCAL CHARACTER WORKSPACE</p>
+      <h1 id="authTitle">Protean Workspace</h1>
+      <p id="authDescription" class="muted">Unlock your local workspace.</p>
+      <form id="authForm" class="stack-form">
+        <label class="field">
+          <span>Username</span>
+          <input id="authUsername" name="username" autocomplete="username" minlength="3" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input id="authPassword" name="password" type="password" autocomplete="current-password" minlength="10" required>
+        </label>
+        <button id="authSubmit" class="button primary" type="submit">
+          <svg class="icon"><use href="#i-lock"></use></svg><span class="button-label">Unlock</span>
+        </button>
+      </form>
+      <p id="authError" class="form-error" role="alert"></p>
+      <p class="security-note">JWT stays in an HttpOnly cookie. Provider credentials remain encrypted on the backend.</p>
+    </section>
+  </div>
+
+  <div id="appShell" class="app-shell" hidden>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="toggleLeft" class="icon-button" type="button" title="Hide character panel" aria-label="Toggle character panel">
+          <svg class="icon"><use href="#i-panel-left"></use></svg>
+        </button>
+        <img src="/static/assets/protean-icon.svg" class="topbar-icon" alt="">
+        <div class="brand-copy">
+          <strong>Protean Workspace</strong>
+          <span id="currentUser" class="microcopy"></span>
+        </div>
+      </div>
+      <div class="active-character-meta">
+        <span id="activeFranchise" class="eyebrow"></span>
+        <strong id="activeCharacterName">Select a character</strong>
+        <span id="activeMedium" class="medium-chip"></span>
+      </div>
+      <div class="topbar-right">
+        <button id="assistantButton" class="button assistant-launch" type="button" hidden>
+          <svg class="icon"><use href="#i-scan"></use></svg><span>Assistant</span>
+        </button>
+        <button id="immersionButton" class="button immersion-launch" type="button" hidden>
+          <svg class="icon"><use href="#i-sparkles"></use></svg><span>Immersion</span>
+        </button>
+        <span id="connectionIndicator" class="connection-indicator"><span class="status-dot"></span>No key</span>
+        <button id="toggleRight" class="icon-button" type="button" title="Hide workspace panel" aria-label="Toggle workspace panel">
+          <svg class="icon"><use href="#i-panel-right"></use></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="studio-grid">
+      <aside id="leftSidebar" class="sidebar sidebar-left" aria-label="Character controls">
+        <section class="character-hero">
+          <div class="portrait-shell">
+            <img id="activePortrait" src="/static/assets/char-tom-riddle.webp" alt="Selected character portrait">
+            <div class="portrait-shade"></div>
+            <div class="portrait-caption">
+              <span id="heroFranchise" class="eyebrow">Harry Potter</span>
+              <strong id="heroName">Tom Riddle</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <div class="section-heading">
+            <div><span class="section-kicker">Library</span><strong>Characters</strong></div>
+            <button id="newChatButton" class="icon-button subtle" title="New chat" aria-label="New chat" type="button">
+              <svg class="icon"><use href="#i-plus"></use></svg>
+            </button>
+          </div>
+          <div class="search-row">
+            <div class="input-with-icon">
+              <svg class="icon"><use href="#i-search"></use></svg>
+              <input id="characterSearch" placeholder="Makoto, Harry Potter…" aria-label="Character research query">
+            </div>
+            <button id="researchButton" class="button compact" type="button">
+              <svg class="icon"><use href="#i-scan"></use></svg><span class="button-label">Research</span>
+            </button>
+          </div>
+          <div id="characterList" class="character-list" aria-live="polite"></div>
+        </section>
+
+        <section class="panel-section tone-section">
+          <label class="field-label" for="toneSelect">Tone preset</label>
+          <select id="toneSelect"></select>
+          <p id="toneDescription" class="microcopy"></p>
+
+          <div class="timeline-divider"></div>
+          <label class="field-label" for="timelineSelect">Timeline phase</label>
+          <select id="timelineSelect"></select>
+          <div class="timeline-meta">
+            <span id="timelinePeriod" class="phase-period"></span>
+            <p id="timelineDescription" class="microcopy"></p>
+          </div>
+
+          <div class="timeline-divider"></div>
+          <label class="field-label" for="scenarioSelect">Scenario</label>
+          <select id="scenarioSelect"></select>
+          <div id="scenarioPreview" class="scenario-preview"></div>
+
+          <div id="customScenarioFields" class="custom-scenario-fields" hidden>
+            <label class="field">
+              <span>Scene name</span>
+              <input id="customScenarioName" maxlength="120" placeholder="Custom scene">
+            </label>
+            <label class="field">
+              <span>What is happening</span>
+              <textarea id="customScenarioWhat" rows="3" maxlength="3000" placeholder="Describe the situation, location, immediate problem, or unusual premise."></textarea>
+            </label>
+            <label class="field">
+              <span>Who it involves</span>
+              <textarea id="customScenarioWho" rows="2" maxlength="1200" placeholder="Character, user, and anyone else actually present."></textarea>
+            </label>
+            <label class="field">
+              <span>Character ↔ user dynamic</span>
+              <textarea id="customScenarioDynamic" rows="3" maxlength="2000" placeholder="Strangers, rivals, classmates, cautious allies, close friends…"></textarea>
+            </label>
+            <p class="microcopy scenario-lock-note">Custom scenes may change circumstances, but they never grant knowledge beyond the selected timeline.</p>
+          </div>
+        </section>
+
+        <details class="panel-details">
+          <summary><svg class="icon"><use href="#i-book"></use></svg><span>Assigned character folder</span></summary>
+          <div class="details-body">
+            <label class="field-label" for="libraryRoot">Bounded library root</label>
+            <input id="libraryRoot" class="path-input" spellcheck="false">
+            <button id="saveLibraryButton" class="button secondary full" type="button"><span class="button-label">Use this folder</span></button>
+            <p class="microcopy">Research scans only supported character files beneath this root.</p>
+          </div>
+        </details>
+
+        <section class="panel-section chat-history-section">
+          <div class="section-heading">
+            <div><span class="section-kicker">Persistent</span><strong>History</strong></div>
+            <svg class="icon section-icon"><use href="#i-history"></use></svg>
+          </div>
+          <div id="chatHistory" class="chat-history"></div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <div class="scene-wrap">
+          <section id="chatStage" class="chat-stage" aria-label="Conversation">
+            <div class="frame-topline">
+              <div class="frame-title">
+                <span id="frameLabel">Notebook</span>
+                <span class="frame-separator">/</span>
+                <span id="sceneLabel">Protean</span>
+              </div>
+              <div class="frame-actions">
+                <button id="focusModeButton" class="icon-button subtle" type="button" title="Hide both sidebars" aria-label="Focus mode">
+                  <svg class="icon"><use href="#i-eye-off"></use></svg>
+                </button>
+              </div>
+            </div>
+            <div id="messages" class="messages" aria-live="polite"></div>
+            <div class="syntax-legend" aria-label="Protean transcript grammar">
+              <span><code>()</code> Dev</span>
+              <span><code>""</code> Speech</span>
+              <span><code>**</code> Action</span>
+            </div>
+            <form id="composer" class="composer">
+              <textarea id="messageInput" rows="1" placeholder='Write naturally — () dev, "" speech, ** action' aria-label="Message"></textarea>
+              <button id="sendButton" class="send-button" type="submit" aria-label="Send">
+                <svg class="icon"><use href="#i-send"></use></svg>
+              </button>
+            </form>
+          </section>
+        </div>
+      </main>
+
+      <aside id="rightSidebar" class="sidebar sidebar-right" aria-label="Workspace controls">
+        <section class="panel-section">
+          <div class="section-heading">
+            <div><span class="section-kicker">Presentation</span><strong>Workspace</strong></div>
+            <svg class="icon section-icon"><use href="#i-settings"></use></svg>
+          </div>
+          <div class="control-grid">
+            <label class="field"><span>Theme</span><select id="themeSelect"></select></label>
+            <label class="field"><span>Background</span><select id="backgroundSelect"></select></label>
+            <label class="field field-wide"><span>Chat frame</span><select id="frameSelect"></select></label>
+          </div>
+          <div class="feature-callout immersion-ready">
+            <div class="callout-icon"><svg class="icon"><use href="#i-sparkles"></use></svg></div>
+            <div><strong>Immersion Mode</strong><span>Available only for character timelines with ready sprite/background packs. Timeline, scenario and tone lock on entry.</span></div>
+            <span id="immersionStatusBadge" class="badge">Not yet implemented</span>
+          </div>
+          <div class="feature-callout assistant-ready">
+            <div class="callout-icon"><svg class="icon"><use href="#i-scan"></use></svg></div>
+            <div><strong>Virtual Assistant</strong><span>Desktop companion mode. Timeline, scenario and tone lock on launch; screen observations remain ephemeral.</span></div>
+            <span id="assistantStatusBadge" class="badge">Not yet implemented</span>
+          </div>
+        </section>
+
+        <details class="panel-details connection-panel" open>
+          <summary><svg class="icon"><use href="#i-key"></use></svg><span>OpenRouter connection</span><span id="keyStatus" class="summary-status">Not configured</span></summary>
+          <div class="details-body">
+            <label class="field"><span>API key</span><input id="apiKeyInput" type="password" autocomplete="off" placeholder="Paste to add or replace"></label>
+            <label class="field"><span>Model</span><input id="modelInput" spellcheck="false" placeholder="openrouter/free"></label>
+            <div class="control-grid">
+              <label class="field"><span>Temperature</span><input id="temperatureInput" type="number" min="0" max="2" step="0.05"></label>
+              <label class="field"><span>Target tokens</span><input id="targetTokensInput" type="number" min="64" max="8192" step="32"></label>
+              <label class="field field-wide"><span>Hard ceiling</span><input id="maxTokensInput" type="number" min="128" max="32768" step="32"></label>
+            </div>
+            <p class="microcopy">The model aims for the target. The hard ceiling leaves emergency headroom; a detected length cutoff triggers one concise continuation.</p>
+            <button id="saveProviderButton" class="button primary full" type="button">
+              <svg class="icon"><use href="#i-key"></use></svg><span class="button-label">Save connection</span>
+            </button>
+            <div class="button-pair">
+              <button id="validateProviderButton" class="button secondary" type="button"><span class="button-label">Validate</span></button>
+              <button id="removeProviderButton" class="button danger" type="button">Remove key</button>
+            </div>
+            <p id="providerFeedback" class="microcopy feedback" aria-live="polite"></p>
+          </div>
+        </details>
+
+        <section class="panel-section boundary-panel">
+          <span class="section-kicker">Architecture boundary</span>
+          <div class="boundary-row"><span>Browser</span><strong>Presentation + input</strong></div>
+          <div class="boundary-row"><span>Server</span><strong>Auth + secrets + prompts + AI</strong></div>
+          <div class="boundary-row"><span>Desktop shell</span><strong>Window + screen capture only</strong></div>
+          <div class="boundary-row"><span>Editor</span><strong>External layout schema tool</strong></div>
+        </section>
+
+        <div class="sidebar-footer">
+          <a class="text-link" href="/static/../" hidden>Home</a>
+          <button id="logoutButton" class="button secondary full" type="button">
+            <svg class="icon"><use href="#i-lock"></use></svg><span>Lock workspace</span>
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+
+  <dialog id="assistantDialog" class="immersion-dialog assistant-dialog" aria-labelledby="assistantDialogTitle">
+    <form id="assistantForm" class="immersion-dialog-card">
+      <div class="immersion-dialog-heading">
+        <div>
+          <span class="section-kicker">Desktop companion</span>
+          <h2 id="assistantDialogTitle">Start Virtual Assistant</h2>
+          <p id="assistantCharacterLabel" class="microcopy"></p>
+        </div>
+        <button id="closeAssistantDialog" class="icon-button subtle" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="immersion-lock-copy">Timeline, scenario and tone are frozen for this Assistant session. The desktop can be observed, but screen evidence never bypasses the selected timeline's knowledge ceiling.</p>
+      <div class="immersion-dialog-grid">
+        <label class="field"><span>Timeline</span><select id="assistantTimelineSelect"></select></label>
+        <label class="field"><span>Tone</span><select id="assistantToneSelect"></select></label>
+        <label class="field field-wide"><span>Scenario</span><select id="assistantScenarioSelect"></select></label>
+      </div>
+      <div id="assistantScenarioPreview" class="scenario-preview immersion-scenario-preview"></div>
+      <div id="assistantCustomFields" class="custom-scenario-fields" hidden>
+        <label class="field"><span>Scene name</span><input id="assistantCustomName" maxlength="120" placeholder="Custom scene"></label>
+        <label class="field"><span>What is happening</span><textarea id="assistantCustomWhat" rows="3" maxlength="3000"></textarea></label>
+        <label class="field"><span>Who it involves</span><textarea id="assistantCustomWho" rows="2" maxlength="1200"></textarea></label>
+        <label class="field"><span>Character ↔ user dynamic</span><textarea id="assistantCustomDynamic" rows="3" maxlength="2000"></textarea></label>
+      </div>
+
+      <div class="assistant-setup-section">
+        <div class="assistant-setup-heading"><strong>Wardrobe</strong><span>Locked skins stay visible until their sprite packs arrive.</span></div>
+        <div id="assistantWardrobeOptions" class="assistant-wardrobe-options"></div>
+      </div>
+
+      <div class="assistant-setup-section">
+        <div class="assistant-setup-heading"><strong>Assistant background</strong><span>Presentation only; never enters character canon.</span></div>
+        <div class="assistant-background-options">
+          <label><input type="radio" name="assistantBackground" value="transparent" checked><span>Transparent</span></label>
+          <label><input type="radio" name="assistantBackground" value="protean"><span>Protean panel</span></label>
+          <label><input type="radio" name="assistantBackground" value="custom"><span>Custom image</span></label>
+        </div>
+        <label id="assistantCustomBackgroundField" class="field" hidden><span>Custom PNG / JPEG / WebP</span><input id="assistantCustomBackground" type="file" accept="image/png,image/jpeg,image/webp"></label>
+      </div>
+
+      <p id="assistantFeedback" class="form-error" role="alert"></p>
+      <div class="immersion-dialog-actions">
+        <button id="cancelAssistantButton" class="button secondary" type="button">Cancel</button>
+        <button id="launchAssistantButton" class="button primary" type="submit"><svg class="icon"><use href="#i-scan"></use></svg><span class="button-label">Launch companion</span></button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="immersionDialog" class="immersion-dialog" aria-labelledby="immersionDialogTitle">
+    <form id="immersionForm" class="immersion-dialog-card">
+      <div class="immersion-dialog-heading">
+        <div>
+          <span class="section-kicker">Full-screen scene</span>
+          <h2 id="immersionDialogTitle">Start Immersion</h2>
+          <p id="immersionCharacterLabel" class="microcopy"></p>
+        </div>
+        <button id="closeImmersionDialog" class="icon-button subtle" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="immersion-lock-copy">Timeline, scenario and tone are frozen when the scene starts. Use Back from Immersion to return here and start another setup.</p>
+      <div class="immersion-dialog-grid">
+        <label class="field"><span>Timeline</span><select id="immersionTimelineSelect"></select></label>
+        <label class="field"><span>Tone</span><select id="immersionToneSelect"></select></label>
+        <label class="field field-wide"><span>Scenario</span><select id="immersionScenarioSelect"></select></label>
+      </div>
+      <div id="immersionScenarioPreview" class="scenario-preview immersion-scenario-preview"></div>
+      <div id="immersionCustomFields" class="custom-scenario-fields" hidden>
+        <label class="field"><span>Scene name</span><input id="immersionCustomName" maxlength="120" placeholder="Custom scene"></label>
+        <label class="field"><span>What is happening</span><textarea id="immersionCustomWhat" rows="3" maxlength="3000"></textarea></label>
+        <label class="field"><span>Who it involves</span><textarea id="immersionCustomWho" rows="2" maxlength="1200"></textarea></label>
+        <label class="field"><span>Character ↔ user dynamic</span><textarea id="immersionCustomDynamic" rows="3" maxlength="2000"></textarea></label>
+      </div>
+      <p id="immersionFeedback" class="form-error" role="alert"></p>
+      <div class="immersion-dialog-actions">
+        <button id="cancelImmersionButton" class="button secondary" type="button">Cancel</button>
+        <button id="enterImmersionButton" class="button primary" type="submit"><svg class="icon"><use href="#i-sparkles"></use></svg><span class="button-label">Enter scene</span></button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

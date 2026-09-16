@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protean.layout/v1",
+  "title": "Protean Workspace layout schema v1",
+  "type": "object",
+  "required": ["schema", "canvas", "elements"],
+  "properties": {
+    "schema": { "const": "protean.layout/v1" },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height", "grid"],
+      "properties": {
+        "width": { "type": "number", "minimum": 320, "maximum": 8192 },
+        "height": { "type": "number", "minimum": 240, "maximum": 8192 },
+        "grid": { "type": "number", "minimum": 1, "maximum": 128 }
+      },
+      "additionalProperties": false
+    },
+    "elements": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["x", "y", "w", "h", "r", "s", "z"],
+        "properties": {
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "w": { "type": "number", "minimum": 40 },
+          "h": { "type": "number", "minimum": 40 },
+          "r": { "type": "number", "minimum": -360, "maximum": 360 },
+          "s": { "type": "number", "minimum": 0.25, "maximum": 2 },
+          "z": { "type": "number", "minimum": 0, "maximum": 999 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "deferred": {
+      "type": "object",
+      "properties": { "spriteMode": { "type": "boolean" } },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

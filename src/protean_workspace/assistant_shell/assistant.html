@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: http://127.0.0.1:* http://localhost:*; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none';">
+  <title>Protean Virtual Assistant</title>
+  <link rel="stylesheet" href="assistant.css">
+</head>
+<body>
+  <main id="assistantRoot" class="assistant-root" data-background="transparent">
+    <div id="customBackground" class="assistant-background" aria-hidden="true"></div>
+    <div class="drag-grip" title="Drag Virtual Assistant"></div>
+    <button id="screenStatus" class="screen-status interactive paused" type="button" title="Enable screen awareness · Ctrl+Shift+Alt+P">○ Screen off</button>
+
+    <section id="bubble" class="speech-bubble" hidden aria-live="polite">
+      <span id="bubbleText"></span>
+    </section>
+
+    <nav id="radialMenu" class="radial-menu" hidden aria-label="Assistant actions">
+      <button class="action-bubble search interactive" data-action="search" type="button">Search online</button>
+      <button class="action-bubble interact interactive" data-action="interact" type="button">Interact</button>
+      <button class="action-bubble wardrobe interactive" data-action="wardrobe" type="button">Wardrobe</button>
+      <button class="action-bubble quit interactive" data-action="quit" type="button">Quit</button>
+    </nav>
+
+    <section id="inputPanel" class="input-panel interactive" hidden>
+      <div class="input-heading"><strong id="inputTitle">Interact</strong><button id="closeInput" type="button">×</button></div>
+      <div id="interactMode" class="mode-row">
+        <button type="button" class="mode-chip active" data-input-type="speech">Speech</button>
+        <button type="button" class="mode-chip" data-input-type="dev">Dev</button>
+      </div>
+      <textarea id="assistantInput" rows="3" maxlength="5000"></textarea>
+      <button id="submitInput" class="submit-button" type="button">Send</button>
+    </section>
+
+    <section id="wardrobePanel" class="wardrobe-panel interactive" hidden>
+      <div class="input-heading"><strong>Wardrobe</strong><button id="closeWardrobe" type="button">×</button></div>
+      <div id="wardrobeList" class="wardrobe-list"></div>
+    </section>
+
+    <div id="spriteStage" class="sprite-stage interactive" role="button" tabindex="-1" aria-label="Character sprite">
+      <img id="sprite" alt="Virtual Assistant character">
+    </div>
+
+    <div id="statusLine" class="status-line">Connecting…</div>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>

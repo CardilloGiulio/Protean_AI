@@ -1,0 +1,13 @@
+{
+  "name": "protean-virtual-assistant-shell",
+  "version": "0.6.1-rc.2",
+  "private": true,
+  "description": "Sandboxed desktop presentation shell for Protean Workspace Virtual Assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "44.2.0"
+  }
+}

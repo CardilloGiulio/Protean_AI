@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Protean Layout Editor</title>
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+  <header class="bar">
+    <div><strong>Protean Layout Editor</strong><span>External composition tool · exports validated-style JSON only</span></div>
+    <div class="actions">
+      <label><input id="gridToggle" type="checkbox" checked> Grid</label>
+      <label><input id="snapToggle" type="checkbox" checked> Snap</label>
+      <button id="resetButton" type="button">Reset</button>
+      <label class="file-button">Import JSON<input id="importInput" type="file" accept="application/json,.json"></label>
+      <button id="exportButton" class="primary" type="button">Export layout.json</button>
+    </div>
+  </header>
+
+  <main class="editor-shell">
+    <section class="canvas-wrap">
+      <div id="canvas" class="canvas grid-on" aria-label="Layout canvas">
+        <div class="safe-zone"></div>
+        <article class="movable left" data-id="leftSidebar" data-x="24" data-y="32" data-w="270" data-h="740" data-r="0">
+          <span class="label">LEFT SIDEBAR</span><span>Character / tone / history</span><i class="resize"></i>
+        </article>
+        <article class="movable chat" data-id="chat" data-x="316" data-y="55" data-w="800" data-h="690" data-r="0">
+          <span class="label">CHAT FRAME</span><span>Notebook / tablet / terminal / manuscript</span><i class="resize"></i>
+        </article>
+        <article class="movable right" data-id="rightSidebar" data-x="1138" data-y="32" data-w="270" data-h="740" data-r="0">
+          <span class="label">RIGHT SIDEBAR</span><span>Appearance / provider / tools</span><i class="resize"></i>
+        </article>
+        <article class="movable portrait" data-id="portrait" data-x="52" data-y="70" data-w="215" data-h="250" data-r="0">
+          <span class="label">PORTRAIT</span><span>Current character art</span><i class="resize"></i>
+        </article>
+        <article class="movable sprite deferred" data-id="spriteAnchor" data-x="800" data-y="210" data-w="280" data-h="470" data-r="0">
+          <span class="label">SPRITE ANCHOR</span><span>Deferred presentation layer</span><i class="resize"></i>
+        </article>
+      </div>
+    </section>
+
+    <aside class="inspector">
+      <p class="kicker">Selection</p>
+      <h2 id="selectionName">Nothing selected</h2>
+      <div class="field-grid">
+        <label>X<input id="xInput" type="number"></label>
+        <label>Y<input id="yInput" type="number"></label>
+        <label>W<input id="wInput" type="number" min="40"></label>
+        <label>H<input id="hInput" type="number" min="40"></label>
+        <label>Rotation<input id="rInput" type="number" step="1"></label>
+        <label>Scale<input id="sInput" type="number" min="0.25" max="2" step="0.05" value="1"></label>
+      </div>
+      <div class="inspector-actions">
+        <button id="frontButton" type="button">Bring forward</button>
+        <button id="centerButton" type="button">Center</button>
+      </div>
+      <hr>
+      <p class="kicker">Boundary</p>
+      <p>This tool has no access to auth, provider credentials, SQLite, prompts, chat messages, or character research. It edits a visual schema only.</p>
+      <p class="note">The future React editor can replace these native drag mechanics with Moveable without changing the exported schema.</p>
+    </aside>
+  </main>
+
+  <script src="editor.js"></script>
+</body>
+</html>
