@@ -23,9 +23,9 @@ if (-not (Test-Path $ElectronMain)) {
 
 $MainText = Get-Content -Raw $ElectronMain
 $SecurityChecks = @(
-    $MainText -match "contextIsolation:\s*true",
-    $MainText -match "nodeIntegration:\s*false",
-    $MainText -match "sandbox:\s*true"
+    [bool]($MainText -match 'contextIsolation\s*:\s*true')
+    [bool]($MainText -match 'nodeIntegration\s*:\s*false')
+    [bool]($MainText -match 'sandbox\s*:\s*true')
 )
 if ($SecurityChecks -contains $false) {
     throw "Electron security settings are incomplete."
