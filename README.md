@@ -24,8 +24,25 @@ It combines traditional roleplay chat with dedicated **Immersion** and **Virtual
 
 ---
 
+## Release Status
+
+**Version 0.6.1 RC2 — FROZEN**
+
+Native Windows/Electron certification: **PASS**
+
+* 60-minute stability soak completed
+* 717 samples recorded
+* Memory growth remained below the 300 MB limits
+* Electron security settings verified
+* No failures or abnormal sampling gaps
+
+See [RC2 Release Status](RC2-RELEASE-STATUS.md) for complete results and evidence.
+
+---
+
 ## Table of Contents
 
+* [Release Status](#release-status)
 * [Quick Start](#quick-start)
 * [Core Architecture](#core-architecture)
 * [First Launch](#first-launch)
@@ -42,7 +59,8 @@ It combines traditional roleplay chat with dedicated **Immersion** and **Virtual
 * [Character Library](#character-library)
 * [Frontend Direction](#frontend-direction)
 * [Testing](#testing)
-* [Current Content Expansion](#current-content-expansion)
+* [RC2 Focus](#rc2-focus)
+* [Project Status](#project-status)
 
 ---
 
@@ -989,9 +1007,11 @@ for the complete RC2 release gate.
 
 # RC2 Focus
 
-`0.6.1 RC2` is primarily a **stabilization release**.
+`0.6.1 RC2` is a **frozen stabilization release**.
 
-The objective is not to expand the feature surface further, but to verify that existing systems satisfy the release gates for:
+The feature surface is frozen. The release has completed its native Windows/Electron certification and passed the required stability and security checks for that runtime.
+
+The RC2 release gates cover:
 
 ```text
 Reliability
@@ -1004,7 +1024,7 @@ Performance
 Regression safety
 ```
 
-For current readiness and unresolved items, see:
+For complete certification evidence and release information, see:
 
 * [RC2 Release Status](RC2-RELEASE-STATUS.md)
 * [Testing](TESTING.md)
@@ -1018,13 +1038,15 @@ For current readiness and unresolved items, see:
 ```text
 Protean Workspace
 Version: 0.6.1 RC2
-Stage: Release Candidate
-Focus: Stabilization / Verification
+Status: FROZEN
+Native Windows/Electron Certification: PASS
 ```
 
 Normal Workspace, character research, persistent chat, structured generation, Immersion, and the initial Virtual Assistant pipeline are implemented.
 
 Visual-mode availability remains intentionally restricted to character/timeline combinations backed by complete asset packs.
+
+The certified Windows/Electron runtime completed a 60-minute stability soak with **717 samples**, remained within its defined memory-growth limits, preserved the expected Electron security configuration, and completed without failures or abnormal sampling gaps.
 
 ---
 
