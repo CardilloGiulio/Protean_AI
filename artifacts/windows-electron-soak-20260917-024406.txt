@@ -1,0 +1,11 @@
+﻿Protean Workspace RC2 Windows/Electron soak: PASS
+Completed UTC: 2026-09-17T01:44:06.4649023Z
+Duration requested: 60 minutes
+Samples recorded: 717
+Initial Electron PIDs: 20504, 20608, 21052, 21600
+Peak working-set growth: 134.48 MB (limit 300 MB)
+Peak private-memory growth: 105.41 MB (limit 300 MB)
+Peak handles: 2509
+Electron security: contextIsolation=true; nodeIntegration=false; sandbox=true
+Failure: none
+Evidence CSV: C:\Code\workspace-archive\FullStackApplications\protean-workspace-v0.6.1-rc2\artifacts\windows-electron-soak-20260917-024406.csv
